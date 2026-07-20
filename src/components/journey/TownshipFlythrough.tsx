@@ -19,9 +19,9 @@ import { ASSETS } from "@/lib/assets";
 const IMAGE_MAP = {
   entrance: ASSETS.slider.web2,
   football: ASSETS.seaImg,
-  clubhouse: ASSETS.gallery[2],
-  pool: ASSETS.gallery[3],
-  park: ASSETS.gallery[0],
+  clubhouse: ASSETS.gallery[1],
+  pool: ASSETS.gallery[2],
+  park: ASSETS.renders.aerial,
   tower: ASSETS.heroTowers,
   apartment: ASSETS.config.creative2,
   skylounge: ASSETS.config.creative3,

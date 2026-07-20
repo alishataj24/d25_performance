@@ -72,7 +72,15 @@ export function Finale() {
                 <div className="flex flex-col gap-6">
                   <FooterItem label="Site Address" value={SITE.siteAddress} />
                   <FooterItem label="Corporate Address" value={SITE.corporateAddress} />
-                  <FooterItem label="RERA Number" value={`RERA: ${SITE.rera}`} />
+                  <FooterItem label="RERA Number">
+                    <span className="flex flex-col gap-1">
+                      {SITE.reraPhases.map((p) => (
+                        <span key={p.phase}>
+                          {p.phase} : {p.number}
+                        </span>
+                      ))}
+                    </span>
+                  </FooterItem>
                   <FooterItem label="Phone">
                     <a href={SITE.phoneHref} className="transition-colors hover:text-gold">
                       {SITE.phone}

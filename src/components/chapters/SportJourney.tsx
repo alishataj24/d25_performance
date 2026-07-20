@@ -13,10 +13,10 @@ const IMAGE_MAP = {
   seaImg: ASSETS.seaImg,
   sliderWeb1: ASSETS.slider.web1,
   sliderWeb2: ASSETS.slider.web2,
-  gallery0: ASSETS.gallery[0],
-  gallery2: ASSETS.gallery[2],
-  gallery3: ASSETS.gallery[3],
-  gallery4: ASSETS.gallery[4],
+  gallery0: ASSETS.renders.aerial,
+  gallery2: ASSETS.gallery[1],
+  gallery3: ASSETS.gallery[2],
+  gallery4: ASSETS.gallery[3],
   heroTowers: ASSETS.heroTowers,
 } as const;
 

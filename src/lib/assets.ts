@@ -14,19 +14,25 @@ export const ASSETS = {
   nambiarBuilders: `${LOCAL}/nambiar-builders.png`,
   nambiarBuildersWhite: `${LOCAL}/nambiar-builders-white.png`,
   heroTowers: `${LOCAL}/hero-towers.png`,
-  masterplan: `${LOCAL}/masterplan.png`,
+  masterplan: `${LOCAL}/masterplan-hires.png`,
   sportsHeroBanner: `${LOCAL}/sports-hero-banner.png`,
   video: `${LOCAL}/hero-video.mp4`,
   seaImg: `${LOCAL}/sea-img.png`,
 
   /** Premium architectural renders — use to avoid repeating heroTowers */
   renders: {
-    aerial: `${LOCAL}/township-aerial.png`,
+    aerial: `${LOCAL}/township-aerial-night.jpg`,
     poolDay: `${LOCAL}/pool-day.png`,
     poolDusk: `${LOCAL}/pool-dusk.png`,
     towers: `${LOCAL}/hero-towers.png`,
     phase3Lifestyle: `${LOCAL}/phase3-lifestyle.png`,
     lifeInside: `${LOCAL}/life-inside.png`,
+    dropOff: `${LOCAL}/drop-off-day.png`,
+    sportsArena: `${LOCAL}/sports-arena.jpg`,
+    gardenLounge: `${LOCAL}/garden-lounge.jpg`,
+    treePlaza: `${LOCAL}/tree-plaza.jpg`,
+    yogaDeck: `${LOCAL}/yoga-deck.jpg`,
+    eldersPlaza: `${LOCAL}/elders-plaza.jpg`,
     inquiryPanel: `${LOCAL}/inquiry-panel.png`,
   },
 
@@ -43,22 +49,29 @@ export const ASSETS = {
     creative1: `${LOCAL}/gallery-creative1.jpg`,
     creative2: `${LOCAL}/gallery-creative2.jpg`,
     creative3: `${LOCAL}/gallery-creative3.jpg`,
+    // Interior mock-ups — one per configuration card
+    interior2bhk: `${LOCAL}/interior-2bhk.jpg`,
+    interior3bhk2t: `${LOCAL}/interior-3bhk-2t.jpg`,
+    interior3bhk3t: `${LOCAL}/interior-3bhk-3t.jpg`,
+    interior4bhk: `${LOCAL}/interior-4bhk.jpg`,
+    interior45bhk: `${LOCAL}/interior-45bhk.jpg`,
   },
 
   gallery: [
-    `${LOCAL}/township-aerial.png`,
-    `${LOCAL}/pool-day.png`,
+    `${LOCAL}/gallery-gal3.webp`,        // clubhouse at sunset — strong opener
     `${LOCAL}/pool-dusk.png`,
-    `${LOCAL}/gallery-gal1.png`,
-    `${LOCAL}/gallery-gal3.webp`,
-    `${LOCAL}/gallery-gal4.webp`,
+    `${LOCAL}/gallery-beach-volleyball.jpg`,
+    `${LOCAL}/drop-off-day.png`,          // arrival canopy
     `${LOCAL}/gallery-gal5.webp`,
-    `${LOCAL}/gallery-gal6.png`,
-    `${LOCAL}/gallery-creative1.jpg`,
-    `${LOCAL}/gallery-creative2.jpg`,
-    `${LOCAL}/conf-conf3.webp`,
-    `${LOCAL}/gallery-5.webp`,
-    `${LOCAL}/hero-towers.png`,
+    `${LOCAL}/gallery-pet-park.jpg`,      // pet park (aerial)
+    `${LOCAL}/gallery-gal1.png`,          // rooftop playground
+    `${LOCAL}/gallery-sports.jpg`,
+    `${LOCAL}/gallery-gal4.webp`,         // lap pool
+    `${LOCAL}/gallery-maidaan.jpg`,       // maidaan — evening event lawn
+    `${LOCAL}/gallery-swimming-pool.jpg`,
+    `${LOCAL}/conf-conf3.webp`,           // interior — variety
+    `${LOCAL}/gallery-balcony.jpg`,       // balcony detail at sunset
+    `${LOCAL}/gallery-gal6.png`,          // towers + pool — dramatic closer
   ],
 
   // Remote assets (icons, location, testimonials)

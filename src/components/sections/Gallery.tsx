@@ -24,9 +24,9 @@ function ScrollArrow({
       type="button"
       onClick={onClick}
       aria-label={direction === "left" ? "Scroll gallery left" : "Scroll gallery right"}
-      className={`absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/20 bg-charcoal/85 text-ivory/80 shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all duration-300 hover:border-bronze hover:bg-charcoal hover:text-ivory cursor-pointer ${
-        direction === "left" ? "left-2 md:left-4" : "right-2 md:right-4"
-      } ${visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      className={`absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/20 bg-charcoal/85 text-ivory/80 shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-opacity duration-300 hover:border-bronze hover:bg-charcoal hover:text-ivory cursor-pointer ${
+        direction === "left" ? "left-3 md:left-5" : "right-3 md:right-5"
+      } ${visible ? "opacity-0 group-hover:opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
         <path
@@ -98,14 +98,7 @@ export function Gallery() {
         </div>
       </div>
 
-      <div className="relative mt-4">
-        {canScrollLeft && (
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-12 bg-gradient-to-r from-charcoal to-transparent md:w-20" />
-        )}
-        {canScrollRight && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-12 bg-gradient-to-l from-charcoal to-transparent md:w-20" />
-        )}
-
+      <div className="group relative mt-4">
         <ScrollArrow direction="left" onClick={() => scrollStrip("left")} visible={canScrollLeft} />
         <ScrollArrow direction="right" onClick={() => scrollStrip("right")} visible={canScrollRight} />
 

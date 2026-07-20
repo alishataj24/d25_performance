@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
-import { CONFIGURATIONS, COPY, getChapter } from "@/lib/constants";
+import { CONFIGURATIONS, COPY } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { useInquiry } from "@/components/providers/InquiryProvider";
 import { ease, duration } from "@/lib/animations";
@@ -54,8 +54,7 @@ function ConfigDetail({
         </h3>
 
         <div className="mt-7 inline-flex items-center rounded-full border border-champagne/30 bg-ivory/[0.04] px-7 py-3.5 text-[clamp(0.9rem,1.1vw,1.05rem)] tracking-[0.02em] text-ivory/90">
-          {config.type} <span className="mx-2 text-champagne/60">—</span>{" "}
-          {config.area.toLocaleString()} sq.ft.
+          {config.type}
         </div>
 
         <button
@@ -72,24 +71,14 @@ function ConfigDetail({
 
 export function Residences() {
   const { residences } = COPY;
-  const chapter = getChapter("configuration")!;
   const total = CONFIGURATIONS.length;
 
   return (
     <section id="configuration" className="relative bg-canvas-deep text-ivory">
       {/* Masthead */}
       <div className="section-padding !pb-0 px-container">
-        <div className="mx-frame flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+        <div className="mx-frame flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
           <div className="max-w-3xl">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: duration.slow, ease: ease.out }}
-              className="kicker !text-champagne mb-6"
-            >
-              {residences.floorPlansLabel} · {chapter.number}
-            </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +94,7 @@ export function Residences() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: duration.slow, delay: 0.12, ease: ease.out }}
-            className="lede text-ivory/50 max-w-sm"
+            className="lede !text-ivory/95 max-w-sm"
           >
             {residences.subheadline}
           </motion.p>

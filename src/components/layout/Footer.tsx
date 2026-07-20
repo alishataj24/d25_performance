@@ -118,7 +118,13 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col items-start justify-between gap-4 border-t border-ivory/10 pt-8 md:flex-row md:items-center">
-            <p className="text-xs text-ivory/40">RERA: {SITE.rera}</p>
+            <div className="flex flex-col gap-1 text-xs text-ivory/40">
+              {SITE.reraPhases.map((p) => (
+                <span key={p.phase}>
+                  {p.phase} : {p.number}
+                </span>
+              ))}
+            </div>
             <p className="text-xs text-ivory/40">© 2026 Nambiar District 25. All rights reserved.</p>
           </div>
 

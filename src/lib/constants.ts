@@ -10,7 +10,12 @@ export const SITE = {
   whatsappIcon: ASSETS.whatsapp,
   brochure: ASSETS.brochure,
   logo: ASSETS.logo,
-  rera: "PRM/KA/RERA/1251/308/PR/100125/007377",
+  rera: "PRM/KA/RERA/1251/308/PR/260526/008686",
+  reraPhases: [
+    { phase: "District 25 Phase 1", number: "PRM/KA/RERA/1251/308/PR/100125/007377" },
+    { phase: "District 25 Phase 2", number: "PRM/KA/RERA/1251/308/PR/200825/008011" },
+    { phase: "District 25 Phase 3", number: "PRM/KA/RERA/1251/308/PR/260526/008686" },
+  ],
   siteAddress:
     "Chandapura Dommasandra Road, Dommasandra, Bengaluru – 562125",
   corporateAddress:
@@ -357,7 +362,7 @@ export const STATS = [
   { value: 40, suffix: "%", label: "Mother Earth Retained" },
   { value: 4, suffix: "", label: "Units per Floor" },
   { value: 150, suffix: "+", label: "Outdoor Amenities" },
-  { value: 1202, suffix: "", label: "Units in Phase 3" },
+  { value: 85, suffix: "%", label: "Open Space" },
 ] as const;
 
 export const HIGHLIGHTS = [
@@ -389,35 +394,35 @@ export const CONFIGURATIONS = [
     title: "Designed for Distinction",
     type: "2BHK + 2T",
     area: 1252,
-    image: ASSETS.renders.phase3Lifestyle,
+    image: ASSETS.config.interior2bhk,
   },
   {
     id: "3bhk-2t",
     title: "Crafted for Comfort",
     type: "3BHK + 2T",
     area: 1518,
-    image: ASSETS.config.conf3,
+    image: ASSETS.config.interior3bhk2t,
   },
   {
     id: "3bhk-3t",
     title: "Experience Elevated",
     type: "3BHK + 3T",
     area: 2060,
-    image: ASSETS.config.creative3,
+    image: ASSETS.config.interior3bhk3t,
   },
   {
     id: "4bhk",
     title: "Luxury, Redefined",
     type: "4BHK + 4T",
     area: 2613,
-    image: ASSETS.renders.aerial,
+    image: ASSETS.config.interior4bhk,
   },
   {
     id: "4.5bhk",
     title: "Crafted for Families",
     type: "4.5BHK + 4T",
     area: 2980,
-    image: ASSETS.config.creative1,
+    image: ASSETS.config.interior45bhk,
   },
 ] as const;
 
