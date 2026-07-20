@@ -28,7 +28,7 @@ export function Clubhouse() {
         >
           <source src={ASSETS.video} type="video/mp4" />
         </video>
-        <HighQualityImage src={ASSETS.gallery[2]} alt="Clubhouse at District 25" fill sizes="100vw" className="object-cover mix-blend-multiply opacity-90" />
+        <HighQualityImage src={ASSETS.gallery[1]} alt="Clubhouse at District 25" fill sizes="100vw" className="object-cover mix-blend-multiply opacity-90" />
         <div className="absolute inset-0 bg-forest-dark/75" />
       </motion.div>
       <div className="relative z-10 section-padding w-full">

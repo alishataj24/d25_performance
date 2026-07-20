@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HighQualityImage } from "@/components/ui/HighQualityImage";
+import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { COPY, getChapter } from "@/lib/constants";
@@ -34,13 +34,10 @@ export function MasterPlan() {
         className="overflow-hidden rounded-[var(--radius-card-lg)] border border-ivory/10 bg-black shadow-[var(--shadow-float)]"
       >
         <div className="relative aspect-[16/9] w-full">
-          <HighQualityImage
+          <ZoomableImage
             src={ASSETS.masterplan}
             alt="Nambiar District 25 master plan"
-            fill
-            unoptimized
-            sizes="(max-width: 1024px) 100vw, 1200px"
-            className="object-contain object-center p-2 md:p-3"
+            className="h-full w-full"
           />
         </div>
       </motion.div>

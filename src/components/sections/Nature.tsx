@@ -20,7 +20,7 @@ export function Nature() {
     <section id="nature" ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
       <motion.div style={{ y: imageY }} className="absolute inset-0 scale-[1.03]">
         <HighQualityImage
-          src={ASSETS.gallery[0]}
+          src={ASSETS.renders.aerial}
           alt="Native tree canopy at District 25"
           fill
           unoptimized

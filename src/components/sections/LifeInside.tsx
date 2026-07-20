@@ -92,7 +92,7 @@ export function LifeInside() {
                 >
                   <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
                     <HighQualityImage
-                      src={ASSETS.renders.lifeInside}
+                      src={ASSETS.renders.dropOff}
                       alt="Villa-styled skyrise residences at District 25"
                       fill
                       unoptimized

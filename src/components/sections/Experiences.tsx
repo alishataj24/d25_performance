@@ -50,9 +50,7 @@ function AmenityIcon({ name, size = 22 }: { name: string; size?: number }) {
     n.includes("futsal") ||
     n.includes("pickle") ||
     n.includes("volleyball") ||
-    n.includes("court") ||
-    n.includes("sportsmen") ||
-    n.includes("oval")
+    n.includes("court")
   )
     return (
       <svg {...props}>
@@ -101,7 +99,9 @@ function AmenityIcon({ name, size = 22 }: { name: string; size?: number }) {
     n.includes("aromatic") ||
     n.includes("medicinal") ||
     n.includes("plaza") ||
-    n.includes("park")
+    n.includes("park") ||
+    n.includes("glade") ||
+    n.includes("thicket")
   )
     return (
       <svg {...props}>
@@ -131,7 +131,7 @@ const COLLECTIONS: Collection[] = [
     id: "sport",
     title: "Sport & Play",
     tagline: "Where the body comes alive.",
-    image: ASSETS.renders.poolDay,
+    image: ASSETS.renders.sportsArena,
     items: [
       "Outdoor Gym",
       "Futsal Court with stepped seating",
@@ -146,7 +146,7 @@ const COLLECTIONS: Collection[] = [
     id: "gardens",
     title: "Gardens & Biodiversity",
     tagline: "A living, breathing landscape.",
-    image: ASSETS.renders.aerial,
+    image: ASSETS.renders.treePlaza,
     items: [
       "Pollinator Garden",
       "Aromatic Plants",
@@ -161,7 +161,7 @@ const COLLECTIONS: Collection[] = [
     id: "wellness",
     title: "Wellness & Movement",
     tagline: "Slow down. Restore. Breathe.",
-    image: ASSETS.renders.poolDusk,
+    image: ASSETS.renders.eldersPlaza,
     items: [
       "Mindful Movement Area",
       "Elders Plaza with Reflexology Trail",
@@ -174,7 +174,7 @@ const COLLECTIONS: Collection[] = [
     id: "family",
     title: "Family & Community",
     tagline: "Room for every generation.",
-    image: ASSETS.gallery[4],
+    image: ASSETS.renders.yogaDeck,
     items: [
       "Children's Play Area",
       "Tot-Lot",
@@ -186,7 +186,7 @@ const COLLECTIONS: Collection[] = [
     id: "arrival",
     title: "Plazas & Arrival",
     tagline: "A grand welcome, every day.",
-    image: ASSETS.config.creative1,
+    image: ASSETS.renders.dropOff,
     items: [
       "Rain Tree Plaza",
       "Palm Plaza",
@@ -250,23 +250,13 @@ export function Experiences() {
                   {amenities.headline}
                 </TextReveal>
               </div>
-              <div className="flex items-center gap-3 md:pb-1">
-                <span className="text-[clamp(2rem,3.2vw,2.6rem)] font-light leading-none text-bronze tabular-nums">
-                  {AMENITIES.length}
-                </span>
-                <span className="text-[0.72rem] uppercase tracking-[0.18em] leading-[1.35] text-grey-600">
-                  Curated
-                  <br />
-                  Amenities
-                </span>
-              </div>
             </div>
 
             {/* How-to affordance so the interaction is obvious */}
             <div className="mt-7 hidden items-center gap-2.5 lg:flex">
               <span className="h-px w-8 bg-bronze/40" aria-hidden />
-              <span className="text-[0.72rem] uppercase tracking-[0.2em] text-grey-600">
-                Hover a collection to explore its spaces
+              <span className="whitespace-nowrap text-[0.85rem] tracking-[0.02em] text-grey-600">
+                Move your mouse over a collection below to see what&apos;s inside
               </span>
               <motion.span
                 aria-hidden

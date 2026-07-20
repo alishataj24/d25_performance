@@ -11,7 +11,7 @@ const HIGHLIGHT_IMAGES = [
   OVERVIEW_IMAGES[0],
   OVERVIEW_IMAGES[1],
   ASSETS.slider.web2,
-  ASSETS.gallery[2],
+  ASSETS.gallery[1],
   ASSETS.heroTowers,
 ] as const;
 
