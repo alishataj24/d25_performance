@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { LineReveal } from "@/components/ui/LineReveal";
 import { PublicationImage } from "@/components/ui/PublicationImage";
-import { COPY, HERO_COPY, getChapter, PHASE_DETAILS, OVERVIEW_IMAGES } from "@/lib/constants";
+import { COPY, HERO_COPY, PHASE_DETAILS, OVERVIEW_IMAGES } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease } from "@/lib/animations";
 
@@ -16,7 +16,6 @@ export function VisionChapter() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const { philosophy, vision } = COPY;
-  const chapter = getChapter("overview")!;
 
   const philOpacity = useTransform(scrollYProgress, [0, 0.35, 0.5], [1, 1, 0]);
   const philY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-15%"]);
@@ -42,7 +41,7 @@ export function VisionChapter() {
         >
           <div className="max-w-[1440px] mx-auto w-full">
             <p className="text-colophon text-stone-dark mb-8">
-              {chapter.number} — {philosophy.label}
+              {philosophy.label}
             </p>
             <LineReveal
               as="h2"
@@ -85,7 +84,7 @@ export function VisionChapter() {
           <div className="max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end">
             <div className="lg:col-span-5 space-y-8">
               <p className="text-colophon text-champagne/70">
-                {getChapter("vision")!.number} — {vision.phaseHeadline}
+                {vision.phaseHeadline}
               </p>
               <h3 className="text-masthead text-ivory font-light leading-[0.95]">
                 {HERO_COPY.headline}
@@ -135,7 +134,7 @@ export function VisionChapter() {
       <div className="relative z-10 bg-forest section-padding -mt-[10vh]" id="district">
         <div className="max-w-[1440px] mx-auto">
           <p className="text-colophon text-champagne/60 mb-6">
-            {getChapter("district")!.number} — {COPY.lifeInside.headline}
+            {COPY.lifeInside.headline}
           </p>
           <div className="space-y-32 md:space-y-40">
             {COPY.lifeInside.moments.map((moment, i) => (

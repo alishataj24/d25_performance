@@ -21,7 +21,7 @@ export function Architecture() {
       <div className="section-padding px-container bg-canvas">
         <div className="mx-frame">
           <span className="kicker mb-8">
-            {chapter.title} · {chapter.number}
+            {chapter.title}
           </span>
           <EditorialSplit
             aside={

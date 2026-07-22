@@ -13,7 +13,7 @@ interface ChapterProps {
   light?: boolean;
 }
 
-export function Chapter({ number, title, chapterId, className, light }: ChapterProps) {
+export function Chapter({ title, chapterId, className, light }: ChapterProps) {
   const essence = chapterId ? CHAPTER_ESSENCE[chapterId] : undefined;
 
   return (
@@ -25,7 +25,7 @@ export function Chapter({ number, title, chapterId, className, light }: ChapterP
       className={cn("mb-5 md:mb-7", className)}
     >
       <span className={cn("kicker", light && "!text-champagne")}>
-        {title} · {number}
+        {title}
       </span>
       {essence && (
         <p

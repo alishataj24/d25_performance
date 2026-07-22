@@ -11,7 +11,6 @@ import {
   LOCATION_HIGHLIGHTS,
   SITE,
   COPY,
-  getChapter,
 } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 
@@ -22,8 +21,6 @@ import { ASSETS } from "@/lib/assets";
 export function LocationDescent() {
   const ref = useRef<HTMLElement>(null);
   const { location, connectivity } = COPY;
-  const locChapter = getChapter("location")!;
-  const connChapter = getChapter("connectivity")!;
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
@@ -74,7 +71,7 @@ export function LocationDescent() {
       <div className="relative z-10 bg-ivory text-forest section-padding -mt-[15vh]" id="connectivity">
         <div className="max-w-[1440px] mx-auto">
           <p className="text-colophon text-stone-dark mb-6">
-            {locChapter.number} — {location.headline}
+            {location.headline}
           </p>
           <h2 className="text-masthead text-forest font-light mb-4 capitalize">{location.headline}</h2>
           <p className="text-title text-forest font-light mb-16">{location.subheadline}</p>
@@ -124,7 +121,7 @@ export function LocationDescent() {
           </div>
 
           <p className="text-colophon text-stone-dark mb-8">
-            {connChapter.number} — {connectivity.headline}
+            {connectivity.headline}
           </p>
           <h3 className="text-title text-forest font-light mb-16">{connectivity.headline}</h3>
 

@@ -36,7 +36,7 @@ export function Nature() {
             aside={
               <motion.div style={{ y: textY }}>
                 <span className="kicker !text-champagne mb-7">
-                  {chapter.title} · {chapter.number}
+                  {chapter.title}
                 </span>
                 <TextReveal as="h2" className="h-section text-ivory mb-10">
                   {nature.headline}

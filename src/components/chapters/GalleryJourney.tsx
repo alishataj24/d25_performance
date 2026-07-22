@@ -43,7 +43,7 @@ export function GalleryJourney() {
                   ? gallery.secondaryHeadline
                   : gallery.tertiaryHeadline
             }
-            chapterLabel={`${chapter.number} — ${chapter.title}`}
+            chapterLabel={chapter.title}
             showChapter={i === 0}
           />
         ))}

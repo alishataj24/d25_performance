@@ -11,7 +11,7 @@ import {
 import { SceneDirector } from "@/components/ui/SceneDirector";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
-import { COPY, getChapter, AMENITIES } from "@/lib/constants";
+import { COPY, getChapter } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
 
@@ -244,7 +244,7 @@ export function Experiences() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div className="max-w-[640px]">
                 <span className="kicker mb-6">
-                  {chapter.title} · {chapter.number}
+                  {chapter.title}
                 </span>
                 <TextReveal as="h2" className="h-section text-forest">
                   {amenities.headline}

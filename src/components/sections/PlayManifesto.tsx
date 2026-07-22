@@ -87,7 +87,7 @@ export function PlayManifesto() {
                 transition={{ duration: duration.cinematic, ease: ease.cinematic }}
                 className="lg:col-span-7"
               >
-                <div className="p-card relative h-full min-h-[320px] aspect-[16/10] lg:aspect-auto overflow-hidden">
+                <div className="p-card relative w-full aspect-[16/10] overflow-hidden lg:h-full lg:min-h-[320px] lg:aspect-auto">
                   <motion.div className="absolute inset-0" style={{ y: imageY }}>
                     <HighQualityImage
                       src={ASSETS.config.creative3}

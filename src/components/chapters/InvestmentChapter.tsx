@@ -48,7 +48,7 @@ export function InvestmentChapter() {
       <div className="relative z-10 section-padding">
         <div className="max-w-[1440px] mx-auto">
           <p className="text-colophon text-champagne/70 mb-8">
-            {chapter.number} — {chapter.title}
+            {chapter.title}
           </p>
           <TextReveal as="h2" className="text-masthead text-ivory font-light mb-8">
             {investment.headline}

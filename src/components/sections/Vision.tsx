@@ -6,9 +6,9 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { SceneDirector } from "@/components/ui/SceneDirector";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
-import { COPY, getChapter, PHASE_DETAILS } from "@/lib/constants";
+import { COPY, PHASE_DETAILS } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
-import { ease, duration, fadeUp, staggerContainer } from "@/lib/animations";
+import { fadeUp, staggerContainer } from "@/lib/animations";
 
 /** Structured tower breakdown — mirrors the original's Phase 3 Details */
 const TOWER_BREAKDOWN = [
@@ -30,7 +30,6 @@ export function Vision() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
   const { vision } = COPY;
-  const chapter = getChapter("vision")!;
 
   return (
     <section id="vision" ref={ref} className="relative bg-canvas-deep text-ivory overflow-hidden">
@@ -40,7 +39,7 @@ export function Vision() {
             {/* Header */}
             <div className="max-w-[840px]">
               <span className="kicker !text-champagne mb-6">
-                {vision.phaseLabel} · {chapter.number}
+                {vision.phaseLabel}
               </span>
               <TextReveal as="h2" className="h-section text-ivory">
                 {vision.phaseHeadline}
