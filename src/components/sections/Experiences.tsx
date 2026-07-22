@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -212,6 +212,13 @@ export function Experiences() {
   const [active, setActive] = useState(0);
   const current = COLLECTIONS[active];
 
+  // Keep the active mobile pill scrolled into view
+  const pillsRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = pillsRef.current?.children[active] as HTMLElement | undefined;
+    el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [active]);
+
   // Cursor-driven parallax + tilt for the image stage
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -269,8 +276,11 @@ export function Experiences() {
             </div>
 
             {/* Mobile collection switcher (tap) */}
-            <div className="mt-10 flex flex-col gap-4 lg:hidden">
-              <div className="flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="mt-10 flex flex-col gap-3 lg:hidden">
+              <div
+                ref={pillsRef}
+                className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
                 {COLLECTIONS.map((c, i) => (
                   <button
                     key={c.id}
@@ -285,9 +295,25 @@ export function Experiences() {
                   </button>
                 ))}
               </div>
-              <p className="text-[0.82rem] font-medium italic tracking-[0.02em] text-bronze">
-                and many more
-              </p>
+
+              {/* Position indicator — shows how many collections there are */}
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-1.5">
+                  {COLLECTIONS.map((c, i) => (
+                    <button
+                      key={c.id}
+                      onClick={() => setActive(i)}
+                      aria-label={`Show ${c.title}`}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === active ? "w-5 bg-bronze" : "w-1.5 bg-bronze/30"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="ml-1 text-[0.72rem] tracking-[0.04em] text-grey-500">
+                  {active + 1} / {COLLECTIONS.length} · swipe to explore
+                </span>
+              </div>
             </div>
 
             {/* Interactive triptych: index · stage · living list */}
