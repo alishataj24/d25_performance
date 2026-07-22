@@ -7,6 +7,9 @@ import { BrandMark } from "@/components/ui/BrandMark";
 import { ASSETS } from "@/lib/assets";
 import { SITE, NAV_LINKS } from "@/lib/constants";
 
+const AVENUE_GRADIENT =
+  "bg-[linear-gradient(180deg,rgba(10,18,14,0.42)_0%,rgba(10,18,14,0.24)_45%,rgba(10,18,14,0.7)_100%)]";
+
 export function Finale() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -26,10 +29,45 @@ export function Finale() {
   const footerY = useTransform(scrollYProgress, [0.44, 0.78], ["100%", "0%"]);
 
   return (
-    <section ref={ref} className="relative h-[300vh] bg-canvas-deep">
-      <div className="sticky top-0 h-screen overflow-hidden bg-canvas-deep">
-        {/* Avenue backdrop — always crisp, gently zooming */}
-        <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0">
+    <>
+      {/* Desktop — cinematic pinned slide-up */}
+      <section ref={ref} className="relative hidden h-[300vh] bg-canvas-deep lg:block">
+        <div className="sticky top-0 h-screen overflow-hidden bg-canvas-deep">
+          {/* Avenue backdrop — always crisp, gently zooming */}
+          <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0">
+            <HighQualityImage
+              src={ASSETS.footerTop}
+              alt="The tree-lined avenues of Nambiar District 25"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className={`absolute inset-0 ${AVENUE_GRADIENT}`} />
+          </motion.div>
+
+          {/* Tagline */}
+          <motion.h2
+            style={{ opacity: textOpacity, y: textY }}
+            className="absolute inset-0 z-10 flex items-center justify-center px-6 text-center h-section text-ivory"
+          >
+            Live the SOHO Life.
+          </motion.h2>
+
+          {/* Footer — solid dark-green panel, slides up to fully cover the avenue */}
+          <motion.div
+            style={{ y: footerY }}
+            className="absolute inset-0 z-20 flex items-center bg-canvas-deep text-ivory"
+          >
+            <div className="mx-auto w-full max-w-7xl px-14 py-14">
+              <FooterGrid />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Mobile — natural document flow (no scroll-jacking) */}
+      <section className="relative bg-canvas-deep text-ivory lg:hidden">
+        <div className="relative h-[62vh] min-h-[420px] overflow-hidden">
           <HighQualityImage
             src={ASSETS.footerTop}
             alt="The tree-lined avenues of Nambiar District 25"
@@ -37,84 +75,82 @@ export function Finale() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,18,14,0.42)_0%,rgba(10,18,14,0.24)_45%,rgba(10,18,14,0.7)_100%)]" />
-        </motion.div>
+          <div className="absolute inset-0" style={{ background: AVENUE_GRADIENT.replace(/_/g, " ") }} />
+          <h2 className="absolute inset-0 flex items-center justify-center px-6 text-center h-section text-ivory">
+            Live the SOHO Life.
+          </h2>
+        </div>
+        <div className="px-8 py-14">
+          <FooterGrid />
+        </div>
+      </section>
+    </>
+  );
+}
 
-        {/* Tagline */}
-        <motion.h2
-          style={{ opacity: textOpacity, y: textY }}
-          className="absolute inset-0 z-10 flex items-center justify-center px-6 text-center h-section text-ivory"
-        >
-          Live the SOHO Life.
-        </motion.h2>
-
-        {/* Footer — solid dark-green panel, slides up to fully cover the avenue */}
-        <motion.div
-          style={{ y: footerY }}
-          className="absolute inset-0 z-20 flex items-start overflow-y-auto overscroll-contain bg-canvas-deep text-ivory md:items-center md:overflow-hidden"
-        >
-          <div className="mx-auto w-full max-w-7xl px-8 py-12 md:px-14 md:py-14">
-            <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.1fr_0.9fr_0.55fr] md:gap-10">
-              {/* Left — logo + details */}
-              <div className="flex flex-col gap-8">
-                <div className="w-fit">
-                  <HighQualityImage
-                    src={ASSETS.nambiarBuildersWhite}
-                    alt="Nambiar Builders"
-                    width={520}
-                    height={124}
-                    priority
-                    unoptimized
-                    className="h-[46px] w-auto md:h-[52px]"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-6">
-                  <FooterItem label="Site Address" value={SITE.siteAddress} />
-                  <FooterItem label="Corporate Address" value={SITE.corporateAddress} />
-                  <FooterItem label="RERA Number">
-                    <span className="flex flex-col gap-1">
-                      {SITE.reraPhases.map((p) => (
-                        <span key={p.phase} className="break-words">
-                          {p.phase} : {p.number}
-                        </span>
-                      ))}
-                    </span>
-                  </FooterItem>
-                  <FooterItem label="Phone">
-                    <a href={SITE.phoneHref} className="transition-colors hover:text-gold">
-                      {SITE.phone}
-                    </a>
-                  </FooterItem>
-                </div>
-
-                <p className="mt-1 text-[0.72rem] uppercase tracking-[0.08em] text-ivory/40">
-                  © 2026 Nambiar District 25. All rights reserved.
-                </p>
-              </div>
-
-              {/* Center — brandmark (SVG for crisp rendering) */}
-              <div className="flex items-center justify-center" aria-label="Nambiar District 25">
-                <BrandMark className="h-auto w-[160px] md:w-[220px]" />
-              </div>
-
-              {/* Right — navigation */}
-              <nav className="flex flex-col gap-4">
-                {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-[0.95rem] uppercase tracking-[0.14em] text-ivory/75 transition-colors duration-300 hover:text-gold"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-            </div>
-          </div>
-        </motion.div>
+/** Footer content — brandmark first on mobile, three-column on desktop */
+function FooterGrid() {
+  return (
+    <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.1fr_0.9fr_0.55fr] lg:items-center lg:gap-10">
+      {/* Brandmark (D logo) — first on mobile, centered on desktop */}
+      <div
+        className="order-1 flex items-center justify-center lg:order-2"
+        aria-label="Nambiar District 25"
+      >
+        <BrandMark className="h-auto w-[150px] md:w-[220px]" />
       </div>
-    </section>
+
+      {/* Nambiar Builders — logo + details */}
+      <div className="order-2 flex flex-col gap-8 lg:order-1">
+        <div className="w-fit">
+          <HighQualityImage
+            src={ASSETS.nambiarBuildersWhite}
+            alt="Nambiar Builders"
+            width={520}
+            height={124}
+            priority
+            unoptimized
+            className="h-[46px] w-auto md:h-[52px]"
+          />
+        </div>
+
+        <div className="flex flex-col gap-6">
+          <FooterItem label="Site Address" value={SITE.siteAddress} />
+          <FooterItem label="Corporate Address" value={SITE.corporateAddress} />
+          <FooterItem label="RERA Number">
+            <span className="flex flex-col gap-1">
+              {SITE.reraPhases.map((p) => (
+                <span key={p.phase} className="break-words">
+                  {p.phase} : {p.number}
+                </span>
+              ))}
+            </span>
+          </FooterItem>
+          <FooterItem label="Phone">
+            <a href={SITE.phoneHref} className="transition-colors hover:text-gold">
+              {SITE.phone}
+            </a>
+          </FooterItem>
+        </div>
+
+        <p className="mt-1 text-[0.72rem] uppercase tracking-[0.08em] text-ivory/40">
+          © 2026 Nambiar District 25. All rights reserved.
+        </p>
+      </div>
+
+      {/* Navigation */}
+      <nav className="order-3 flex flex-col gap-4">
+        {NAV_LINKS.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="text-[0.95rem] uppercase tracking-[0.14em] text-ivory/75 transition-colors duration-300 hover:text-gold"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </div>
   );
 }
 
