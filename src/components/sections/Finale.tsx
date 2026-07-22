@@ -101,7 +101,7 @@ function FooterGrid() {
       </div>
 
       {/* Nambiar Builders — logo + details */}
-      <div className="order-2 flex flex-col gap-8 lg:order-1">
+      <div className="order-3 flex flex-col gap-8 lg:order-1">
         <div className="w-fit">
           <HighQualityImage
             src={ASSETS.nambiarBuildersWhite}
@@ -139,7 +139,7 @@ function FooterGrid() {
       </div>
 
       {/* Navigation */}
-      <nav className="order-3 flex flex-col gap-4">
+      <nav className="order-2 flex flex-col gap-4 lg:order-3">
         {NAV_LINKS.map((link) => (
           <a
             key={link.href}
