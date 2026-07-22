@@ -6,6 +6,7 @@ import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { ASSETS } from "@/lib/assets";
 import { SITE, NAV_LINKS } from "@/lib/constants";
+import { ease, duration } from "@/lib/animations";
 
 const AVENUE_GRADIENT =
   "bg-[linear-gradient(180deg,rgba(10,18,14,0.42)_0%,rgba(10,18,14,0.24)_45%,rgba(10,18,14,0.7)_100%)]";
@@ -65,24 +66,44 @@ export function Finale() {
         </div>
       </section>
 
-      {/* Mobile — natural document flow (no scroll-jacking) */}
+      {/* Mobile — natural document flow (no scroll-jacking), animated on view */}
       <section className="relative bg-canvas-deep text-ivory lg:hidden">
         <div className="relative h-[62vh] min-h-[420px] overflow-hidden">
-          <HighQualityImage
-            src={ASSETS.footerTop}
-            alt="The tree-lined avenues of Nambiar District 25"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0" style={{ background: AVENUE_GRADIENT.replace(/_/g, " ") }} />
-          <h2 className="absolute inset-0 flex items-center justify-center px-6 text-center h-section text-ivory">
+          <motion.div
+            initial={{ scale: 1.14 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: duration.cinematic, ease: ease.out }}
+            className="absolute inset-0"
+          >
+            <HighQualityImage
+              src={ASSETS.footerTop}
+              alt="The tree-lined avenues of Nambiar District 25"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </motion.div>
+          <div className={`absolute inset-0 ${AVENUE_GRADIENT}`} />
+          <motion.h2
+            initial={{ opacity: 0, y: 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: duration.slow, ease: ease.out }}
+            className="absolute inset-0 flex items-center justify-center px-6 text-center h-section text-ivory"
+          >
             Live the SOHO Life.
-          </h2>
+          </motion.h2>
         </div>
-        <div className="px-8 py-14">
+        <motion.div
+          initial={{ opacity: 0, y: 44 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: duration.slow, ease: ease.out }}
+          className="px-8 py-14"
+        >
           <FooterGrid />
-        </div>
+        </motion.div>
       </section>
     </>
   );
