@@ -51,10 +51,10 @@ export function Finale() {
         {/* Footer — solid dark-green panel, slides up to fully cover the avenue */}
         <motion.div
           style={{ y: footerY }}
-          className="absolute inset-0 z-20 flex items-center bg-canvas-deep text-ivory"
+          className="absolute inset-0 z-20 flex items-start overflow-y-auto overscroll-contain bg-canvas-deep text-ivory md:items-center md:overflow-hidden"
         >
-          <div className="mx-auto w-full max-w-7xl px-8 py-14 md:px-14">
-            <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-[1.1fr_0.9fr_0.55fr] md:gap-10">
+          <div className="mx-auto w-full max-w-7xl px-8 py-12 md:px-14 md:py-14">
+            <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.1fr_0.9fr_0.55fr] md:gap-10">
               {/* Left — logo + details */}
               <div className="flex flex-col gap-8">
                 <div className="w-fit">
@@ -75,7 +75,7 @@ export function Finale() {
                   <FooterItem label="RERA Number">
                     <span className="flex flex-col gap-1">
                       {SITE.reraPhases.map((p) => (
-                        <span key={p.phase}>
+                        <span key={p.phase} className="break-words">
                           {p.phase} : {p.number}
                         </span>
                       ))}
