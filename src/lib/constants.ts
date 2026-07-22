@@ -145,7 +145,6 @@ export const CHAPTER_ESSENCE: Record<string, string> = {
   architecture: "Architectural elegance",
   clubhouse: "Belonging · Timeless luxury",
   configuration: "Family legacy · Prestige",
-  "master-plan": "Discovery · Precision",
   specifications: "Architectural elegance",
   amenities: "Wellness · Sophistication",
   gallery: "Architectural elegance",
@@ -319,8 +318,8 @@ export const COPY = {
     phoneLabel: "Phone",
   },
   masterPlan: {
-    headline: "Master Plan",
-    subheadline: "Nambiar District 25 Phase 3 — An integrated township",
+    headline: "One Integrated Township",
+    subheadline: "The complete Nambiar District 25 — all three phases, master planned as one.",
     body: "A sprawling master plan integrating villa-style skyrise residences, sports districts, native tree canopy, clubhouse, and proposed retail & commercial space.",
   },
   specifications: {

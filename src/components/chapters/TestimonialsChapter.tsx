@@ -34,7 +34,7 @@ export function TestimonialsChapter() {
 
       <div className="max-w-[1440px] mx-auto mb-20 md:mb-28">
         <p className="text-colophon text-stone-dark mb-6">
-          {chapter.number} — {chapter.title}
+          {chapter.title}
         </p>
         <TextReveal as="h2" className="text-masthead text-forest font-light mb-6">
           {testimonials.headline}

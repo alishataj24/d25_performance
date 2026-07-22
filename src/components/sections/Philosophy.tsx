@@ -6,13 +6,12 @@ import { SceneDirector } from "@/components/ui/SceneDirector";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { useInquiry } from "@/components/providers/InquiryProvider";
-import { HERO_COPY, getChapter, STATS, VOICE } from "@/lib/constants";
+import { HERO_COPY, STATS, VOICE } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { fadeUp, staggerContainer, ease, duration } from "@/lib/animations";
 
 export function Philosophy() {
   const sectionRef = useRef<HTMLElement>(null);
-  const chapter = getChapter("overview")!;
   const { openInquiry } = useInquiry();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -39,7 +38,7 @@ export function Philosophy() {
                 transition={{ duration: duration.slow, ease: ease.cinematic }}
                 className="lg:col-span-7"
               >
-                <span className="kicker mb-6">Overview · {chapter.number}</span>
+                <span className="kicker mb-6">Overview</span>
                 <h2 className="h-section text-forest">
                   {HERO_COPY.headline}{" "}
                   <span className="text-bronze">{HERO_COPY.headlineAccent}</span>

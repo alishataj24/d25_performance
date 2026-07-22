@@ -53,10 +53,6 @@ function ConfigDetail({
           {config.title}
         </h3>
 
-        <div className="mt-7 inline-flex items-center rounded-full border border-champagne/30 bg-ivory/[0.04] px-7 py-3.5 text-[clamp(0.9rem,1.1vw,1.05rem)] tracking-[0.02em] text-ivory/90">
-          {config.type}
-        </div>
-
         <button
           onClick={() => openInquiry("pricing")}
           className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-ivory/10 px-7 py-3 text-[0.8rem] tracking-[0.1em] font-medium text-ivory/85 transition-all duration-500 hover:bg-gold hover:text-forest-dark hover:-translate-y-0.5 cursor-pointer"

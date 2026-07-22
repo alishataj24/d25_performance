@@ -49,7 +49,7 @@ export function CraftsmanshipChapter() {
         <div className="absolute top-0 left-0 right-0 section-padding pt-24 z-10">
           <div className="max-w-[1440px] mx-auto">
             <p className="text-colophon text-stone-dark mb-4">
-              {specChapter.number} — {specChapter.title}
+              {specChapter.title}
             </p>
             <TextReveal as="h2" className="text-masthead text-forest font-light">
               {specifications.headline}
@@ -74,7 +74,7 @@ export function CraftsmanshipChapter() {
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div>
             <p className="text-colophon text-stone-dark mb-6">
-              {buildChapter.number} — {buildChapter.title}
+              {buildChapter.title}
             </p>
             <h3 className="text-title text-forest font-light mb-6">{construction.headline}</h3>
             <p className="text-editorial text-forest mb-6">{construction.subheadline}</p>

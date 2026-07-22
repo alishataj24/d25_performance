@@ -35,7 +35,7 @@ export function MasterPlanJourney() {
       <div className="section-padding">
         <div className="max-w-[1440px] mx-auto">
           <p className="text-colophon text-stone-dark mb-8">
-            {chapter.number} — {chapter.title}
+            {chapter.title}
           </p>
           <TextReveal as="h2" className="text-masthead text-forest font-light mb-6">
             {masterPlan.headline}

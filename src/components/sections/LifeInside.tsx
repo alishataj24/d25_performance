@@ -58,7 +58,7 @@ export function LifeInside() {
             {/* Heading */}
             <div className="mx-auto max-w-[900px] text-center">
               <span className="kicker kicker-center justify-center !text-champagne mb-6">
-                {chapter.title} · {chapter.number}
+                {chapter.title}
               </span>
               <TextReveal as="h2" align="center" className="h-section text-ivory">
                 {lifeInside.headline}

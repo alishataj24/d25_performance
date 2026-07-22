@@ -26,7 +26,7 @@ export function SportJourney() {
   const stopCount = stops.length;
   const { sports, nature, clubhouse } = COPY;
   const chapter = getChapter("sports-district")!;
-  const chapterLabel = `${chapter.number} — ${chapter.title}`;
+  const chapterLabel = chapter.title;
 
   const { scrollYProgress } = useScroll({
     target: ref,

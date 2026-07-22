@@ -97,7 +97,7 @@ export function TownshipFlythrough() {
       <div className="relative z-10 bg-charcoal section-padding -mt-[15vh]">
         <div className="max-w-[1440px] mx-auto">
           <p className="text-colophon text-bronze/60 mb-6">
-            {chapter.number} — {chapter.title}
+            {chapter.title}
           </p>
           <h3 className="text-title text-ivory font-light mb-4">{COPY.amenities.headline}</h3>
           <p className="text-body text-ivory/50 mb-16 !max-w-2xl">{COPY.amenities.subheadline}</p>
