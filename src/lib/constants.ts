@@ -73,49 +73,44 @@ export const VOICE = {
     idea: "Movement · Sport · Wellness · Community",
     ideaLine: "A township built around movement",
     watchStory: "Watch the Story",
-    privatePresentation: "Schedule a Private Presentation",
+    privatePresentation: "Book a Visit",
   },
   loading: "Phase 3",
   cta: {
-    connect: "Begin a Conversation",
-    collection: "The Collection",
+    connect: "Enquire Now",
+    collection: "Brochure",
     exploreResidence: "Explore This Residence",
     residenceDetails: "Residence Details",
     privateViewing: "Arrange a Visit",
-    nav: "Connect",
-    floatingConnect: "Connect",
-    floatingCollection: "The Collection",
-    viewCollection: "View the Collection",
+    nav: "Enquire",
+    floatingConnect: "Enquire Now",
+    floatingCollection: "Brochure",
+    viewCollection: "View Brochure",
   },
   modal: {
     enquire: {
-      title: "A Conversation Begins",
-      subtitle:
-        "Share a few details and allow us to curate a private presentation tailored to your lifestyle.",
+      title: "Enquire Now",
+      subtitle: "Share your details and we’ll get back to you shortly.",
     },
     pricing: {
-      title: "Residence Details",
-      subtitle:
-        "Each configuration is composed with architectural intention. We will share particulars tailored to your preferences.",
+      title: "Get Details",
+      subtitle: "Leave your details and we’ll share the residence particulars.",
     },
     brochure: {
-      title: "The Collection",
-      subtitle:
-        "A curated visual journey through District 25. Leave your details, or view the collection directly.",
-      directLink: "View the collection directly",
+      title: "Download Brochure",
+      subtitle: "Share your details to receive the brochure, or open it directly.",
+      directLink: "Open brochure",
     },
     viewing: {
-      title: "Visit in Person",
-      subtitle:
-        "There is no substitute for standing within the vision. Arrange a private walkthrough at your convenience.",
+      title: "Book a Visit",
+      subtitle: "Share your details and we’ll arrange a site visit.",
     },
-    submit: "Continue",
-    submitEnquire: "Continue the Journey",
-    submitViewing: "Schedule My Private Presentation",
-    thankTitle: "We look forward to welcoming you.",
-    thankBody:
-      "Our advisor will contact you shortly to arrange your private presentation.",
-    phoneNote: "Or speak with us directly",
+    submit: "Submit",
+    submitEnquire: "Submit",
+    submitViewing: "Book Visit",
+    thankTitle: "Thank you.",
+    thankBody: "Our team will contact you shortly.",
+    phoneNote: "Or call us at",
   },
   finalCta: {
     eyebrow: "An Invitation",
@@ -285,7 +280,7 @@ export const COPY = {
   residences: {
     label: "Configuration",
     floorPlansLabel: "Floor Plans",
-    headline: "Your Future Home Unveiled",
+    headline: "Unveiled",
     subheadline:
       "Explore 2, 3 & 4 BHK skyrise residences — each configuration crafted for distinction, comfort, and elevated living.",
     artisticNote: "Artistic Impression",

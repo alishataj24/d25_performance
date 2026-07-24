@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
@@ -14,6 +15,11 @@ export function MasterPlan() {
   const { masterPlan } = COPY;
   const chapter = getChapter("master-plan")!;
   const [expanded, setExpanded] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Lock body scroll while the fullscreen viewer is open
   useEffect(() => {
@@ -27,6 +33,52 @@ export function MasterPlan() {
       window.removeEventListener("keydown", onKey);
     };
   }, [expanded]);
+
+  const viewer = (
+    <motion.div
+      key="master-plan-viewer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Master plan viewer"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, ease: ease.out }}
+      className="fixed inset-0 z-[9999] flex flex-col bg-black"
+    >
+      {/* Top bar — X to close */}
+      <div
+        className="relative z-[10] flex shrink-0 items-center justify-end bg-[#0a120e] px-3 shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+        style={{
+          paddingTop: "max(0.85rem, env(safe-area-inset-top, 0px))",
+          paddingBottom: "0.85rem",
+        }}
+      >
+        <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-caption tracking-[0.12em] text-ivory/50">
+          Drag to pan · pinch to zoom
+        </span>
+
+        <button
+          type="button"
+          onClick={() => setExpanded(false)}
+          aria-label="Close master plan"
+          className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ivory/40 bg-ivory/10 text-ivory"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" aria-hidden>
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="relative min-h-0 flex-1">
+        <ZoomableImage
+          src={ASSETS.masterplan}
+          alt="Nambiar District 25 master plan"
+          className="h-full w-full"
+        />
+      </div>
+    </motion.div>
+  );
 
   return (
     <SectionShell
@@ -42,7 +94,6 @@ export function MasterPlan() {
         <p className="mt-4 text-body text-champagne">{masterPlan.subheadline}</p>
       </div>
 
-      {/* Inline preview — tap/click to open the fullscreen zoom viewer */}
       <motion.button
         type="button"
         onClick={() => setExpanded(true)}
@@ -62,7 +113,6 @@ export function MasterPlan() {
             sizes="(max-width: 1024px) 100vw, 1200px"
             className="object-contain object-center p-2 md:p-3"
           />
-          {/* Expand affordance */}
           <span className="pointer-events-none absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-ivory/15 bg-black/60 px-4 py-2 text-caption tracking-[0.08em] text-ivory/90 backdrop-blur-md transition-colors group-hover:border-champagne/50 group-hover:text-ivory">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
@@ -72,40 +122,12 @@ export function MasterPlan() {
         </div>
       </motion.button>
 
-      {/* Fullscreen zoom viewer */}
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: ease.out }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm"
-          >
-            <ZoomableImage
-              src={ASSETS.masterplan}
-              alt="Nambiar District 25 master plan"
-              className="h-full w-full"
-            />
-
-            {/* Close */}
-            <button
-              type="button"
-              onClick={() => setExpanded(false)}
-              aria-label="Close master plan"
-              className="absolute top-5 right-5 z-[2] flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 bg-black/60 text-ivory/90 backdrop-blur-md transition-colors hover:border-champagne/60 hover:text-ivory"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round">
-                <path d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            </button>
-
-            <span className="pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 text-caption tracking-[0.12em] text-ivory/50">
-              Pinch or use the controls to zoom · drag to pan
-            </span>
-          </motion.div>
+      {/* Portal to body — escapes SceneDirector transform + section overflow */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>{expanded ? viewer : null}</AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </SectionShell>
   );
 }
