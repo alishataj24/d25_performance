@@ -88,7 +88,7 @@ export function InquiryDialog({
               {/* Left — cinematic panel */}
               <div className="relative hidden md:block overflow-hidden">
                 <HighQualityImage
-                  src={ASSETS.renders.lifeInside}
+                  src={ASSETS.renders.inquiryPanel}
                   alt="Nambiar District 25 residences"
                   fill
                   unoptimized

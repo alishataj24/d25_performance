@@ -33,7 +33,8 @@ export const ASSETS = {
     treePlaza: `${LOCAL}/tree-plaza.jpg`,
     yogaDeck: `${LOCAL}/yoga-deck.jpg`,
     eldersPlaza: `${LOCAL}/elders-plaza.jpg`,
-    inquiryPanel: `${LOCAL}/inquiry-panel.png`,
+    /** Left panel for enquire / lead-capture forms */
+    inquiryPanel: `${LOCAL}/inquiry-form-balcony.jpg`,
   },
 
   slider: {
