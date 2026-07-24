@@ -139,7 +139,7 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
             >
               <div className="relative hidden min-h-[420px] overflow-hidden md:block">
                 <HighQualityImage
-                  src={ASSETS.renders.lifeInside}
+                  src={ASSETS.renders.inquiryPanel}
                   alt="Nambiar District 25 residences"
                   fill
                   unoptimized
