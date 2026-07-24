@@ -143,7 +143,8 @@ body {
   font-family: inherit;
   font-size: 16px;
   line-height: 1.4;
-  overflow-x: hidden;
+  /* clip keeps sticky scroll-stacks working (hidden breaks position:sticky on mobile) */
+  overflow-x: clip;
   overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -978,9 +979,22 @@ body.cursor-refined
 .inquiry-copy {
   font-family: var(--font-montserrat), system-ui, sans-serif;
   font-size: 0.875rem;
-  line-height: 1.65;
+  line-height: 1.55;
   color: var(--grey-600);
-  margin-bottom: 1.375rem;
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+
+@media (max-width: 767px) {
+  .inquiry-headline {
+    font-size: 1.35rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .inquiry-copy {
+    font-size: 0.8125rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .inquiry-form {

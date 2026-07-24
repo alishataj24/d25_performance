@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
-import { SITE, VOICE } from "@/lib/constants";
+import { SITE, VOICE, getConciergeSubmitLabel } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
 import type { InquiryType } from "@/components/ui/InquiryModal";
@@ -144,7 +144,6 @@ export function InquiryDialog({
                   </motion.div>
                 ) : (
                   <>
-                    <p className="inquiry-eyebrow">{VOICE.cta.connect}</p>
                     <h2 id="inquiry-title" className="inquiry-headline pr-8">
                       {title}
                     </h2>
@@ -172,7 +171,7 @@ export function InquiryDialog({
                         size="md"
                         className="inquiry-submit w-full"
                       >
-                        {modalCopy.submit}
+                        {getConciergeSubmitLabel(type)}
                       </Button>
                     </form>
 

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useCallback } from "react";
 import { InquiryDialog } from "@/components/ui/InquiryDialog";
+import { TimedLeadCapture } from "@/components/ui/TimedLeadCapture";
 import type { InquiryType } from "@/components/ui/InquiryModal";
 
 type Presentation = "modal" | "concierge";
@@ -39,6 +40,7 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
     <InquiryContext.Provider value={{ openInquiry, openConcierge, closeInquiry }}>
       {children}
       <InquiryDialog isOpen={isOpen} onClose={closeInquiry} type={type} />
+      <TimedLeadCapture suppressed={isOpen} />
     </InquiryContext.Provider>
   );
 }

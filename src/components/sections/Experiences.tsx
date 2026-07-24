@@ -212,11 +212,20 @@ export function Experiences() {
   const [active, setActive] = useState(0);
   const current = COLLECTIONS[active];
 
-  // Keep the active mobile pill scrolled into view
+  // Keep the active mobile pill centered in the strip only — never scroll the page
   const pillsRef = useRef<HTMLDivElement>(null);
+  const prevActive = useRef(active);
   useEffect(() => {
-    const el = pillsRef.current?.children[active] as HTMLElement | undefined;
-    el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    const container = pillsRef.current;
+    const el = container?.children[active] as HTMLElement | undefined;
+    if (!container || !el) return;
+
+    // Skip mount so mobile landing stays on the hero banner
+    if (prevActive.current === active) return;
+    prevActive.current = active;
+
+    const left = el.offsetLeft - (container.clientWidth - el.clientWidth) / 2;
+    container.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [active]);
 
   // Cursor-driven parallax + tilt for the image stage
@@ -279,7 +288,9 @@ export function Experiences() {
             <div className="mt-10 flex flex-col gap-3 lg:hidden">
               <div
                 ref={pillsRef}
-                className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                data-lenis-prevent
+                className="flex gap-2 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                style={{ WebkitOverflowScrolling: "touch" }}
               >
                 {COLLECTIONS.map((c, i) => (
                   <button

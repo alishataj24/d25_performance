@@ -37,10 +37,20 @@ export const ASSETS = {
   },
 
   slider: {
+    /** Desktop landscape creatives (original — used across site) */
     web1: `${LOCAL}/slider-web1.png`,
     web2: `${LOCAL}/slider-web2.png`,
-    mob1: `${LOCAL}/slider-web1.png`,
-    mob2: `${LOCAL}/slider-web2.png`,
+    web3: `${LOCAL}/banner-desk-elevation-v2.png`,
+    web4: `${LOCAL}/banner-desk-interior-v2.png`,
+    /** Desktop hero — all same size 1024×460 */
+    desk1: `${LOCAL}/banner-desk-1.png`,
+    desk2: `${LOCAL}/banner-desk-2.png`,
+    desk3: `${LOCAL}/banner-desk-3.png`,
+    desk4: `${LOCAL}/banner-desk-4-v5.png`,
+    /** Mobile hero — all same size 682×1024 */
+    mob1: `${LOCAL}/banner-mob-1.png`,
+    mob2: `${LOCAL}/banner-mob-2.png`,
+    mob3: `${LOCAL}/banner-mob-3.png`,
   },
 
   config: {

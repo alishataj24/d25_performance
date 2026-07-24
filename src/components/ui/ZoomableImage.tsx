@@ -103,7 +103,10 @@ export function ZoomableImage({ src, alt, className }: ZoomableImageProps) {
       </motion.div>
 
       {/* Zoom controls */}
-      <div className="absolute bottom-4 left-1/2 z-[1] flex -translate-x-1/2 items-center gap-1 rounded-full border border-ivory/15 bg-black/60 p-1 backdrop-blur-md">
+      <div
+        className="absolute left-1/2 z-[1] flex -translate-x-1/2 items-center gap-1 rounded-full border border-ivory/15 bg-black/60 p-1 backdrop-blur-md"
+        style={{ bottom: "max(1rem, env(safe-area-inset-bottom, 0px))" }}
+      >
         <button
           type="button"
           onClick={zoomOut}

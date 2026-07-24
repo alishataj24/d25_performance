@@ -1,5 +1,6 @@
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Navigation } from "@/components/layout/Navigation";
+import { FloatingCTA } from "@/components/layout/FloatingCTA";
 import { Arrival } from "@/components/sections/Arrival";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { PlayManifesto } from "@/components/sections/PlayManifesto";
@@ -15,8 +16,7 @@ import { Location } from "@/components/sections/Location";
 import { Finale } from "@/components/sections/Finale";
 
 /**
- * Tight, editorial homepage mirroring the original's scope — no bloat.
- * Hero → Overview → Play → Phase 3 → Highlights → Configuration →
+ * Hero → Overview → Configuration → Modern Life Needs Play → Phase 3 →
  * Model Homes → Amenities → Master Plan → Gallery → Testimonials → Location → Finale.
  */
 export default function Home() {
@@ -24,13 +24,13 @@ export default function Home() {
     <>
       <ScrollProgress />
       <Navigation />
-      <main className="documentary">
+      <main className="documentary pb-[calc(4rem+env(safe-area-inset-bottom,0px))] md:pb-24">
         <Arrival />
         <Philosophy />
+        <Residences />
         <PlayManifesto />
         <Vision />
         <LifeInside />
-        <Residences />
         <ModelHomes />
         <Experiences />
         <MasterPlan />
@@ -39,6 +39,7 @@ export default function Home() {
         <Location />
         <Finale />
       </main>
+      <FloatingCTA />
     </>
   );
 }

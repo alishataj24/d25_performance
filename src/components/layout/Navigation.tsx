@@ -175,23 +175,41 @@ export function Navigation() {
           </button>
 
           <button
+            type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer relative z-10 ml-auto"
+            className={cn(
+              "relative z-10 ml-auto flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
+              menuOpen ? "text-charcoal" : onHero ? "text-ivory" : "text-charcoal"
+            )}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className={cn(
-                  "block w-6 h-px transition-all duration-500",
-                  onHero && !menuOpen ? "bg-ivory" : "bg-charcoal",
-                  i === 0 && menuOpen && "rotate-45 translate-y-[3.5px]",
-                  i === 1 && menuOpen && "opacity-0",
-                  i === 2 && menuOpen && "-rotate-45 -translate-y-[3.5px]"
-                )}
-              />
-            ))}
+            {menuOpen ? (
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                aria-hidden
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <span className="flex flex-col gap-1.5" aria-hidden>
+                {[0, 1, 2].map((i) => (
+                  <span
+                    key={i}
+                    className={cn(
+                      "block h-px w-6",
+                      onHero ? "bg-ivory" : "bg-charcoal"
+                    )}
+                  />
+                ))}
+              </span>
+            )}
           </button>
         </nav>
       </header>
@@ -203,7 +221,7 @@ export function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: ease.cinematic }}
-            className="fixed inset-0 z-[90] bg-forest-dark flex flex-col justify-center items-center lg:hidden"
+            className="fixed inset-0 z-[95] bg-forest-dark flex flex-col justify-center items-center lg:hidden"
           >
             <nav className="flex flex-col items-center gap-8">
               {NAV_LINKS.map((link, i) => {
