@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { SITE, VOICE, getConciergeSubmitLabel } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
+import { isValidIndianMobile, PHONE_ERROR } from "@/lib/validation";
 import type { InquiryType } from "@/components/ui/InquiryModal";
 
 interface InquiryDialogProps {
@@ -28,7 +30,8 @@ export function InquiryDialog({
   onClose,
   type = "enquire",
 }: InquiryDialogProps) {
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
+  const [phoneError, setPhoneError] = useState("");
   const { title, subtitle } = modalCopy[type];
 
   useEffect(() => {
@@ -43,19 +46,28 @@ export function InquiryDialog({
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (!isOpen) setSubmitted(false);
+    if (!isOpen) setPhoneError("");
   }, [isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    const form = e.currentTarget;
+    const phone = (form.elements.namedItem("phone") as HTMLInputElement | null)?.value ?? "";
+
+    if (!isValidIndianMobile(phone)) {
+      setPhoneError(PHONE_ERROR);
+      (form.elements.namedItem("phone") as HTMLInputElement | null)?.focus();
+      return;
+    }
+    setPhoneError("");
+
+    // Brochure is only delivered after the form is completed
     if (type === "brochure") {
       window.open(SITE.brochure, "_blank", "noopener,noreferrer");
     }
-    setTimeout(() => {
-      setSubmitted(false);
-      onClose();
-    }, 2200);
+
+    onClose();
+    router.push("/thank-you");
   };
 
   return (
@@ -107,6 +119,9 @@ export function InquiryDialog({
                     className="h-[5.25rem] w-auto max-w-[95%] object-contain object-left brightness-0 invert opacity-95"
                   />
                   <div>
+                    <p className="mb-3 text-[0.72rem] uppercase tracking-[0.22em] text-ivory/70">
+                      Nambiar District 25
+                    </p>
                     <p className="bronze-line w-10 mb-5" />
                     <p className="text-[clamp(1.6rem,2.4vw,2rem)] font-light leading-[1.15] tracking-[-0.01em] text-ivory">
                       Live the SOHO Life
@@ -132,70 +147,53 @@ export function InquiryDialog({
                   <span className="inquiry-close-line inquiry-close-line--b" />
                 </button>
 
-                {submitted ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex min-h-[360px] flex-col items-center justify-center text-center"
+                <h2 id="inquiry-title" className="inquiry-headline pr-8">
+                  {title}
+                </h2>
+                <p className="inquiry-copy">{subtitle}</p>
+
+                <form onSubmit={handleSubmit} className="inquiry-form" noValidate>
+                  {FIELDS.map((field) => (
+                    <div key={field.id} className="form-field">
+                      <label htmlFor={`inquiry-${field.id}`} className="form-label">
+                        {field.label}
+                      </label>
+                      <input
+                        id={`inquiry-${field.id}`}
+                        name={field.id}
+                        type={field.type}
+                        required
+                        autoComplete={field.autoComplete}
+                        {...(field.id === "phone"
+                          ? {
+                              inputMode: "tel" as const,
+                              maxLength: 15,
+                              onChange: () => phoneError && setPhoneError(""),
+                            }
+                          : {})}
+                        className="form-input"
+                      />
+                      {field.id === "phone" && phoneError && (
+                        <p className="mt-1.5 text-[0.78rem] text-[#b23b3b]">{phoneError}</p>
+                      )}
+                    </div>
+                  ))}
+                  <Button
+                    type="submit"
+                    variant="invitation"
+                    size="md"
+                    className="inquiry-submit w-full"
                   >
-                    <div className="bronze-line w-12 mx-auto mb-6" />
-                    <p className="inquiry-headline text-center mb-2">{modalCopy.thankTitle}</p>
-                    <p className="inquiry-copy text-center">{modalCopy.thankBody}</p>
-                  </motion.div>
-                ) : (
-                  <>
-                    <h2 id="inquiry-title" className="inquiry-headline pr-8">
-                      {title}
-                    </h2>
-                    <p className="inquiry-copy">{subtitle}</p>
+                    {getConciergeSubmitLabel(type)}
+                  </Button>
+                </form>
 
-                    <form onSubmit={handleSubmit} className="inquiry-form">
-                      {FIELDS.map((field) => (
-                        <div key={field.id} className="form-field">
-                          <label htmlFor={`inquiry-${field.id}`} className="form-label">
-                            {field.label}
-                          </label>
-                          <input
-                            id={`inquiry-${field.id}`}
-                            name={field.id}
-                            type={field.type}
-                            required
-                            autoComplete={field.autoComplete}
-                            className="form-input"
-                          />
-                        </div>
-                      ))}
-                      <Button
-                        type="submit"
-                        variant="invitation"
-                        size="md"
-                        className="inquiry-submit w-full"
-                      >
-                        {getConciergeSubmitLabel(type)}
-                      </Button>
-                    </form>
-
-                    {type === "brochure" && (
-                      <p className="inquiry-footer-link">
-                        <a
-                          href={SITE.brochure}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-bronze hover:text-forest transition-colors"
-                        >
-                          {modalCopy.brochure.directLink}
-                        </a>
-                      </p>
-                    )}
-
-                    <p className="inquiry-footer">
-                      {modalCopy.phoneNote}{" "}
-                      <a href={SITE.phoneHref} className="text-bronze hover:text-forest transition-colors">
-                        {SITE.phone}
-                      </a>
-                    </p>
-                  </>
-                )}
+                <p className="inquiry-footer">
+                  {modalCopy.phoneNote}{" "}
+                  <a href={SITE.phoneHref} className="text-bronze hover:text-forest transition-colors">
+                    {SITE.phone}
+                  </a>
+                </p>
               </div>
             </div>
           </motion.div>

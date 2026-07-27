@@ -12,10 +12,6 @@ import { cn } from "@/lib/utils";
 /** Desktop — all creatives same size as original sports banners (1024×460) */
 const DESKTOP_SLIDES = [
   {
-    src: ASSETS.slider.desk1,
-    alt: "District 25 — Less scroll time. More goal time.",
-  },
-  {
     src: ASSETS.slider.desk2,
     alt: "District 25 Phase 3 — The next chapter of luxury begins. Elevation.",
   },
@@ -31,10 +27,6 @@ const DESKTOP_SLIDES = [
 
 /** Mobile — all creatives same 682×1024 frame */
 const MOBILE_SLIDES = [
-  {
-    src: ASSETS.slider.mob1,
-    alt: "District 25 — Less scroll time. More goal time. Sports District Phase 3.",
-  },
   {
     src: ASSETS.slider.mob2,
     alt: "District 25 Phase 3 — Interior-focused. The next chapter of luxury begins.",

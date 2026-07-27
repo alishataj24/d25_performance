@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
@@ -8,6 +9,7 @@ import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { SITE, VOICE } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
+import { isValidIndianMobile, PHONE_ERROR } from "@/lib/validation";
 import { useHeroExperience } from "@/components/providers/HeroExperienceProvider";
 
 /** Bump key when behaviour changes so prior dismissals don’t hide the popup forever in a tab */
@@ -42,10 +44,11 @@ function markDismissed() {
 }
 
 export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) {
+  const router = useRouter();
   const { loadingComplete } = useHeroExperience();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
   const armed = useRef(false);
 
   useEffect(() => {
@@ -91,18 +94,26 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
 
   const dismiss = () => {
     setOpen(false);
-    setSubmitted(false);
+    setPhoneError("");
     markDismissed();
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    const form = e.currentTarget;
+    const phone = (form.elements.namedItem("mobile") as HTMLInputElement | null)?.value ?? "";
+
+    if (!isValidIndianMobile(phone)) {
+      setPhoneError(PHONE_ERROR);
+      (form.elements.namedItem("mobile") as HTMLInputElement | null)?.focus();
+      return;
+    }
+    setPhoneError("");
     markDismissed();
-    window.setTimeout(() => {
-      setSubmitted(false);
-      setOpen(false);
-    }, 2200);
+    // Deliver the brochure the form offers, once details are provided
+    window.open(SITE.brochure, "_blank", "noopener,noreferrer");
+    setOpen(false);
+    router.push("/thank-you");
   };
 
   if (!mounted) return null;
@@ -158,6 +169,9 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
                     className="h-[5.25rem] w-auto max-w-[95%] object-contain object-left brightness-0 invert opacity-95"
                   />
                   <div>
+                    <p className="mb-3 text-[0.72rem] uppercase tracking-[0.22em] text-ivory/70">
+                      Nambiar District 25
+                    </p>
                     <p className="bronze-line mb-5 w-10" />
                     <p className="text-[clamp(1.6rem,2.4vw,2rem)] font-light leading-[1.15] tracking-[-0.01em] text-ivory">
                       Live the SOHO Life
@@ -182,77 +196,60 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
                   <span className="inquiry-close-line inquiry-close-line--b" />
                 </button>
 
-                {submitted ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex min-h-[280px] flex-col items-center justify-center text-center"
+                <h2 id="lead-capture-title" className="inquiry-headline pr-8">
+                  Express Your Interest
+                </h2>
+                <p className="inquiry-copy">
+                  Please enter your details to know more about Nambiar District 25 —
+                  enquire now or download the brochure.
+                </p>
+
+                <form onSubmit={handleSubmit} className="inquiry-form" noValidate>
+                  {FIELDS.map((field) => (
+                    <div key={field.id} className="form-field">
+                      <label htmlFor={`lead-${field.id}`} className="form-label">
+                        {field.label}
+                      </label>
+                      <input
+                        id={`lead-${field.id}`}
+                        name={field.id}
+                        type={field.type}
+                        required
+                        autoComplete={field.autoComplete}
+                        {...(field.id === "mobile"
+                          ? {
+                              inputMode: "tel" as const,
+                              maxLength: 15,
+                              onChange: () => phoneError && setPhoneError(""),
+                            }
+                          : {})}
+                        className="form-input"
+                      />
+                      {field.id === "mobile" && phoneError && (
+                        <p className="mt-1.5 text-[0.78rem] text-[#b23b3b]">{phoneError}</p>
+                      )}
+                    </div>
+                  ))}
+
+                  <Button
+                    type="submit"
+                    variant="invitation"
+                    size="md"
+                    className="inquiry-submit w-full"
                   >
-                    <div className="bronze-line mx-auto mb-6 w-12" />
-                    <p className="inquiry-headline mb-2 text-center">
-                      {VOICE.modal.thankTitle}
-                    </p>
-                    <p className="inquiry-copy text-center">{VOICE.modal.thankBody}</p>
-                  </motion.div>
-                ) : (
-                  <>
-                    <h2 id="lead-capture-title" className="inquiry-headline pr-8">
-                      Express Your Interest
-                    </h2>
-                    <p className="inquiry-copy">
-                      Please enter your details to know more about Nambiar District 25 —
-                      enquire now or download the brochure.
-                    </p>
+                    Submit
+                  </Button>
+                </form>
 
-                    <form onSubmit={handleSubmit} className="inquiry-form">
-                      {FIELDS.map((field) => (
-                        <div key={field.id} className="form-field">
-                          <label htmlFor={`lead-${field.id}`} className="form-label">
-                            {field.label}
-                          </label>
-                          <input
-                            id={`lead-${field.id}`}
-                            name={field.id}
-                            type={field.type}
-                            required
-                            autoComplete={field.autoComplete}
-                            className="form-input"
-                          />
-                        </div>
-                      ))}
-
-                      <Button
-                        type="submit"
-                        variant="invitation"
-                        size="md"
-                        className="inquiry-submit w-full"
-                      >
-                        Submit
-                      </Button>
-                    </form>
-
-                    <p className="inquiry-footer-link">
-                      <a
-                        href={SITE.brochure}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-bronze transition-colors hover:text-forest"
-                      >
-                        Or download the brochure
-                      </a>
-                    </p>
-
-                    <p className="inquiry-footer">
-                      {VOICE.modal.phoneNote}{" "}
-                      <a
-                        href={SITE.phoneHref}
-                        className="text-bronze transition-colors hover:text-forest"
-                      >
-                        {SITE.phone}
-                      </a>
-                    </p>
-                  </>
-                )}
+                <p className="inquiry-footer">
+                  {VOICE.modal.phoneNote}{" "}
+                  <a
+                    href={SITE.phoneHref}
+                    className="text-bronze transition-colors hover:text-forest"
+                  >
+                    {SITE.phone}
+                  </a>
+                </p>
               </div>
             </div>
           </motion.div>
