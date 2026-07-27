@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
 import { ease } from "@/lib/animations";
+import { useInquiry } from "@/components/providers/InquiryProvider";
 
 function DownloadIcon() {
   return (
@@ -47,35 +48,36 @@ function PhoneIcon() {
  * Download Brochure | Call Now (opens dial pad / phone app)
  */
 export function FloatingCTA() {
+  const { openInquiry } = useInquiry();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: ease.cinematic, delay: 0.35 }}
-      className="fixed inset-x-0 bottom-0 z-40"
+      className="fixed inset-x-0 bottom-0 z-40 md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
-      <div className="mx-auto w-full max-w-[1920px] px-0 md:px-6 md:pb-4">
+      <div className="mx-auto w-full max-w-[1920px]">
         <div
-          className="flex items-stretch border-t border-white/10 shadow-[0_-8px_28px_rgba(0,0,0,0.35)] md:overflow-hidden md:rounded-full md:border md:border-white/10"
+          className="flex items-stretch border-t border-white/10 shadow-[0_-8px_28px_rgba(0,0,0,0.35)]"
           style={{
             background:
               "linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 55%, #121212 100%)",
           }}
         >
-          <a
-            href={SITE.brochure}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => openInquiry("brochure")}
             aria-label="Download brochure"
-            className="flex flex-1 items-center justify-center gap-2 px-3 py-3.5 text-[0.78rem] font-medium tracking-[0.04em] text-white transition-colors hover:bg-white/5 sm:text-[0.82rem] md:py-3.5"
+            className="flex flex-1 items-center justify-center gap-2 px-3 py-3.5 text-[0.78rem] font-medium tracking-[0.04em] text-white transition-colors hover:bg-white/5 sm:text-[0.82rem]"
           >
             <DownloadIcon />
             <span className="text-center leading-tight">
               <span className="sm:hidden">Brochure</span>
               <span className="hidden sm:inline">Download Brochure</span>
             </span>
-          </a>
+          </button>
           <span
             className="w-px shrink-0 self-stretch bg-white/35 my-2.5"
             aria-hidden
@@ -83,7 +85,7 @@ export function FloatingCTA() {
           <a
             href={SITE.phoneHref}
             aria-label={`Call Now ${SITE.phone}`}
-            className="flex flex-1 items-center justify-center gap-2 px-3 py-3.5 text-[0.78rem] font-medium tracking-[0.04em] text-white transition-colors hover:bg-white/5 sm:text-[0.82rem] md:py-3.5"
+            className="flex flex-1 items-center justify-center gap-2 px-3 py-3.5 text-[0.78rem] font-medium tracking-[0.04em] text-white transition-colors hover:bg-white/5 sm:text-[0.82rem]"
           >
             <PhoneIcon />
             Call Now
