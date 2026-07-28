@@ -47,10 +47,10 @@ export const ASSETS = {
     desk1: `${LOCAL}/banner-desk-web-1.jpg`,
     desk2: `${LOCAL}/banner-desk-web-2.jpg`,
     desk3: `${LOCAL}/banner-desk-web-3.jpg`,
-    /** Mobile hero — all same size 682×1024 */
-    mob1: `${LOCAL}/banner-mob-1.png`,
-    mob2: `${LOCAL}/banner-mob-2.png`,
-    mob3: `${LOCAL}/banner-mob-3.png`,
+    /** Mobile hero — 500×800, logo-erased "Next Chapter of Luxury" creatives */
+    mob1: `${LOCAL}/banner-mob-web-1.jpg`,
+    mob2: `${LOCAL}/banner-mob-web-2.jpg`,
+    mob3: `${LOCAL}/banner-mob-web-3.jpg`,
   },
 
   config: {

@@ -25,15 +25,19 @@ const DESKTOP_SLIDES = [
   },
 ] as const;
 
-/** Mobile — all creatives same 682×1024 frame */
+/** Mobile — "Next Chapter of Luxury" creatives (500×800) */
 const MOBILE_SLIDES = [
   {
+    src: ASSETS.slider.mob1,
+    alt: "Nambiar District 25 Phase 3 — The next chapter of luxury begins.",
+  },
+  {
     src: ASSETS.slider.mob2,
-    alt: "District 25 Phase 3 — Interior-focused. The next chapter of luxury begins.",
+    alt: "Nambiar District 25 Phase 3 — The SOHO Life. 2, 3 & 4 BHK skyrise residences.",
   },
   {
     src: ASSETS.slider.mob3,
-    alt: "District 25 — Bengaluru's biggest sports address. Soho Life Phase 3.",
+    alt: "Nambiar District 25 Phase 3 — Skyrise residences off Sarjapur Road.",
   },
 ] as const;
 
@@ -41,7 +45,7 @@ const INTERVAL_MS = 5000;
 
 /** Shared frames — same size for every slide */
 const DESKTOP_ASPECT = "2000 / 900";
-const MOBILE_ASPECT = "682 / 1024";
+const MOBILE_ASPECT = "500 / 800";
 
 function ArrowIcon({ dir }: { dir: "prev" | "next" }) {
   return (
