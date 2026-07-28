@@ -162,17 +162,30 @@ export function Navigation() {
             })}
           </div>
 
-          <button
-            onClick={() => openInquiry("enquire", onHero ? "concierge" : "modal")}
-            className={cn(
-              "hidden lg:inline-flex justify-self-end items-center gap-2 rounded-full px-6 py-2.5 text-[0.8rem] font-medium tracking-[0.02em] transition-all duration-500 cursor-pointer",
-              onHero
-                ? "btn-ghost-light drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
-                : "bg-forest text-ivory shadow-[0_10px_30px_-10px_rgba(28,46,31,0.5)] hover:bg-forest-dark hover:-translate-y-0.5"
-            )}
-          >
-            {VOICE.cta.nav}
-          </button>
+          <div className="hidden lg:flex justify-self-end items-center gap-3">
+            <button
+              onClick={() => openInquiry("brochure", onHero ? "concierge" : "modal")}
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[0.8rem] font-medium tracking-[0.02em] transition-all duration-500 cursor-pointer",
+                onHero
+                  ? "border-ivory/45 text-ivory hover:bg-ivory/10 drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
+                  : "border-forest/25 text-forest hover:border-forest/60 hover:-translate-y-0.5"
+              )}
+            >
+              Download Brochure
+            </button>
+            <button
+              onClick={() => openInquiry("enquire", onHero ? "concierge" : "modal")}
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[0.8rem] font-medium tracking-[0.02em] transition-all duration-500 cursor-pointer",
+                onHero
+                  ? "btn-ghost-light drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
+                  : "bg-forest text-ivory shadow-[0_10px_30px_-10px_rgba(28,46,31,0.5)] hover:bg-forest-dark hover:-translate-y-0.5"
+              )}
+            >
+              {VOICE.cta.nav}
+            </button>
+          </div>
 
           <button
             type="button"
