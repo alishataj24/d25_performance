@@ -119,9 +119,6 @@ export function InquiryDialog({
                     className="h-[5.25rem] w-auto max-w-[95%] object-contain object-left brightness-0 invert opacity-95"
                   />
                   <div>
-                    <p className="mb-3 text-[0.72rem] uppercase tracking-[0.22em] text-ivory/70">
-                      Nambiar District 25
-                    </p>
                     <p className="bronze-line w-10 mb-5" />
                     <p className="text-[clamp(1.6rem,2.4vw,2rem)] font-light leading-[1.15] tracking-[-0.01em] text-ivory">
                       Live the SOHO Life
@@ -129,7 +126,7 @@ export function InquiryDialog({
                       in Bengaluru.
                     </p>
                     <p className="mt-4 text-[0.8rem] leading-relaxed text-ivory/70">
-                      District 25 Phase 3.
+                      Nambiar District 25 Phase 3.
                     </p>
                   </div>
                 </div>
