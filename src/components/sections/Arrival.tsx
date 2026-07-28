@@ -47,6 +47,13 @@ const INTERVAL_MS = 5000;
 const DESKTOP_ASPECT = "2000 / 900";
 const MOBILE_ASPECT = "500 / 800";
 
+/** Direction-aware horizontal slide between banner images */
+const slideVariants = {
+  enter: (dir: number) => ({ x: dir >= 0 ? "100%" : "-100%", opacity: 0.6 }),
+  center: { x: "0%", opacity: 1 },
+  exit: (dir: number) => ({ x: dir >= 0 ? "-100%" : "100%", opacity: 0.6 }),
+};
+
 function ArrowIcon({ dir }: { dir: "prev" | "next" }) {
   return (
     <svg
@@ -72,12 +79,12 @@ function MobileVerticalBanner({
   revealActive: boolean;
   reduceMotion: boolean | null;
 }) {
-  const [index, setIndex] = useState(0);
+  const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
   const touchX = useRef<number | null>(null);
   const slide = MOBILE_SLIDES[index];
 
   const go = useCallback((dir: -1 | 1) => {
-    setIndex((i) => (i + dir + MOBILE_SLIDES.length) % MOBILE_SLIDES.length);
+    setSlide(([i]) => [(i + dir + MOBILE_SLIDES.length) % MOBILE_SLIDES.length, dir]);
   }, []);
 
   useEffect(() => {
@@ -107,28 +114,40 @@ function MobileVerticalBanner({
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={slide.src}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: revealActive ? 1 : 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.75, ease: ease.cinematic }}
-          className="absolute inset-0"
-        >
-          <HighQualityImage
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            priority={index === 0}
-            unoptimized
-            sizes="100vw"
-            // contain — full creative (incl. awards) always visible; no bottom crop
-            className="!object-contain !object-top"
-            style={{ objectFit: "contain", objectPosition: "top center" }}
-          />
-        </motion.div>
-      </AnimatePresence>
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: revealActive ? 1 : 0 }}
+        transition={{ duration: 0.9, ease: ease.cinematic }}
+      >
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={index}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { duration: 0.6, ease: ease.cinematic },
+              opacity: { duration: 0.35, ease: ease.cinematic },
+            }}
+            className="absolute inset-0"
+          >
+            <HighQualityImage
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              unoptimized
+              sizes="100vw"
+              // contain — full creative (incl. awards) always visible; no bottom crop
+              className="!object-contain !object-top"
+              style={{ objectFit: "contain", objectPosition: "top center" }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
 
       {MOBILE_SLIDES.length > 1 && (
         <>
@@ -156,7 +175,7 @@ function MobileVerticalBanner({
                 key={s.src}
                 type="button"
                 aria-label={`Show slide ${i + 1}`}
-                onClick={() => setIndex(i)}
+                onClick={() => setSlide([i, i >= index ? 1 : -1])}
                 className={cn(
                   "h-1.5 rounded-full transition-all duration-300",
                   i === index ? "w-5 bg-bronze" : "w-1.5 bg-charcoal/25"
@@ -177,16 +196,18 @@ function DesktopLandscapeBanner({
   revealActive: boolean;
   reduceMotion: boolean | null;
 }) {
-  const [slideIndex, setSlideIndex] = useState(0);
+  const [[slideIndex, direction], setSlide] = useState<[number, number]>([0, 0]);
   const slide = DESKTOP_SLIDES[slideIndex];
+
+  const go = useCallback((dir: -1 | 1) => {
+    setSlide(([i]) => [(i + dir + DESKTOP_SLIDES.length) % DESKTOP_SLIDES.length, dir]);
+  }, []);
 
   useEffect(() => {
     if (!revealActive || reduceMotion || DESKTOP_SLIDES.length <= 1) return;
-    const timer = setInterval(() => {
-      setSlideIndex((i) => (i + 1) % DESKTOP_SLIDES.length);
-    }, INTERVAL_MS);
+    const timer = setInterval(() => go(1), INTERVAL_MS);
     return () => clearInterval(timer);
-  }, [revealActive, reduceMotion]);
+  }, [revealActive, reduceMotion, go]);
 
   return (
     <div
@@ -202,13 +223,18 @@ function DesktopLandscapeBanner({
         animate={{ opacity: revealActive ? 1 : 0 }}
         transition={{ duration: 1.2, ease: ease.cinematic, delay: 0.1 }}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
-            key={slide.src}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.9, ease: ease.cinematic }}
+            key={slideIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { duration: 0.7, ease: ease.cinematic },
+              opacity: { duration: 0.4, ease: ease.cinematic },
+            }}
             className="absolute inset-0"
           >
             <HighQualityImage
@@ -224,6 +250,42 @@ function DesktopLandscapeBanner({
           </motion.div>
         </AnimatePresence>
       </motion.div>
+
+      {DESKTOP_SLIDES.length > 1 && (
+        <>
+          <button
+            type="button"
+            aria-label="Previous banner"
+            onClick={() => go(-1)}
+            className="absolute left-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/25 bg-black/35 text-ivory backdrop-blur-md transition-colors hover:bg-black/60"
+          >
+            <ArrowIcon dir="prev" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next banner"
+            onClick={() => go(1)}
+            className="absolute right-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/25 bg-black/35 text-ivory backdrop-blur-md transition-colors hover:bg-black/60"
+          >
+            <ArrowIcon dir="next" />
+          </button>
+
+          <div className="absolute bottom-6 left-8 z-20 flex gap-1.5">
+            {DESKTOP_SLIDES.map((s, i) => (
+              <button
+                key={s.src}
+                type="button"
+                aria-label={`Show slide ${i + 1}`}
+                onClick={() => setSlide([i, i >= slideIndex ? 1 : -1])}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  i === slideIndex ? "w-6 bg-ivory" : "w-1.5 bg-ivory/45"
+                )}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
