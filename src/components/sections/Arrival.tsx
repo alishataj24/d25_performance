@@ -9,19 +9,19 @@ import { ASSETS } from "@/lib/assets";
 import { ease } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
-/** Desktop — all creatives same size as original sports banners (1024×460) */
+/** Desktop — "Next Chapter of Luxury" creatives (2000×900) */
 const DESKTOP_SLIDES = [
   {
+    src: ASSETS.slider.desk1,
+    alt: "Nambiar District 25 Phase 3 — The next chapter of luxury begins.",
+  },
+  {
     src: ASSETS.slider.desk2,
-    alt: "District 25 Phase 3 — The next chapter of luxury begins. Elevation.",
+    alt: "Nambiar District 25 Phase 3 — The SOHO Life. 2, 3 & 4 BHK skyrise residences.",
   },
   {
     src: ASSETS.slider.desk3,
-    alt: "District 25 — Bengaluru's biggest sports address",
-  },
-  {
-    src: ASSETS.slider.desk4,
-    alt: "District 25 Phase 3 — The next chapter of luxury begins. Interiors.",
+    alt: "Nambiar District 25 Phase 3 — Skyrise residences off Sarjapur Road.",
   },
 ] as const;
 
@@ -40,7 +40,7 @@ const MOBILE_SLIDES = [
 const INTERVAL_MS = 5000;
 
 /** Shared frames — same size for every slide */
-const DESKTOP_ASPECT = "1024 / 460";
+const DESKTOP_ASPECT = "2000 / 900";
 const MOBILE_ASPECT = "682 / 1024";
 
 function ArrowIcon({ dir }: { dir: "prev" | "next" }) {
