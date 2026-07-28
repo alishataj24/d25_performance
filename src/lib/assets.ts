@@ -43,11 +43,10 @@ export const ASSETS = {
     web2: `${LOCAL}/slider-web2.png`,
     web3: `${LOCAL}/banner-desk-elevation-v2.png`,
     web4: `${LOCAL}/banner-desk-interior-v2.png`,
-    /** Desktop hero — all same size 1024×460 */
-    desk1: `${LOCAL}/banner-desk-1.png`,
-    desk2: `${LOCAL}/banner-desk-2.png`,
-    desk3: `${LOCAL}/banner-desk-3.png`,
-    desk4: `${LOCAL}/banner-desk-4-v5.png`,
+    /** Desktop hero — 2000×900, logo-erased "Next Chapter of Luxury" creatives */
+    desk1: `${LOCAL}/banner-desk-web-1.jpg`,
+    desk2: `${LOCAL}/banner-desk-web-2.jpg`,
+    desk3: `${LOCAL}/banner-desk-web-3.jpg`,
     /** Mobile hero — all same size 682×1024 */
     mob1: `${LOCAL}/banner-mob-1.png`,
     mob2: `${LOCAL}/banner-mob-2.png`,
