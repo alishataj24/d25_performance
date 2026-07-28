@@ -110,10 +110,9 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
     }
     setPhoneError("");
     markDismissed();
-    // Deliver the brochure the form offers, once details are provided
-    window.open(SITE.brochure, "_blank", "noopener,noreferrer");
+    // Deliver the brochure the form offers, from the Thank-You page
     setOpen(false);
-    router.push("/thank-you");
+    router.push("/thank-you?brochure=1");
   };
 
   if (!mounted) return null;

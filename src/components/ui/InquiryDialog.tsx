@@ -61,13 +61,10 @@ export function InquiryDialog({
     }
     setPhoneError("");
 
-    // Brochure is only delivered after the form is completed
-    if (type === "brochure") {
-      window.open(SITE.brochure, "_blank", "noopener,noreferrer");
-    }
-
+    // Always land on the Thank-You page; the brochure is delivered there
+    // (via ?brochure=1) so a popup blocker can never swallow the redirect.
     onClose();
-    router.push("/thank-you");
+    router.push(type === "brochure" ? "/thank-you?brochure=1" : "/thank-you");
   };
 
   return (
