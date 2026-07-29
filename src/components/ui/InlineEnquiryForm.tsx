@@ -40,7 +40,7 @@ export function InlineEnquiryForm() {
           Share your details and we&apos;ll get back to you shortly.
         </p>
 
-        <form onSubmit={handleSubmit} className="inquiry-form" noValidate>
+        <form onSubmit={handleSubmit} className="inquiry-form mt-7" noValidate>
           {FIELDS.map((field) => (
             <div key={field.id} className="form-field">
               <label htmlFor={`inline-${field.id}`} className="form-label">
