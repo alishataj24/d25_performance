@@ -11,7 +11,7 @@ const FIELDS = [
   { id: "phone", type: "tel", label: "Phone number", autoComplete: "tel" },
 ] as const;
 
-/** Enquiry form embedded directly in a section (no modal) — dark premium card. */
+/** Enquiry form embedded directly in a section (no modal) — warm cream card. */
 export function InlineEnquiryForm() {
   const router = useRouter();
   const [phoneError, setPhoneError] = useState("");
@@ -31,22 +31,19 @@ export function InlineEnquiryForm() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-[var(--radius-card-lg)] bg-canvas-deep p-7 shadow-[var(--shadow-float)] sm:p-9">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_80%_0%,rgba(122,92,50,0.16),transparent_60%)]" />
+    <div className="relative overflow-hidden rounded-[var(--radius-card-lg)] border border-bronze/20 bg-[#f7f1e6] p-7 shadow-[var(--shadow-float)] sm:p-9">
+      <span className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-bronze/70 to-transparent" aria-hidden />
 
       <div className="relative z-[1]">
-        <span className="kicker !text-champagne mb-4">Enquire Now</span>
-        <p className="text-[0.95rem] leading-relaxed text-ivory/65">
+        <span className="kicker mb-4">Enquire Now</span>
+        <p className="text-[0.95rem] leading-relaxed text-grey-600">
           Share your details and we&apos;ll get back to you shortly.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-6" noValidate>
+        <form onSubmit={handleSubmit} className="inquiry-form" noValidate>
           {FIELDS.map((field) => (
-            <div key={field.id} className="flex flex-col gap-1.5">
-              <label
-                htmlFor={`inline-${field.id}`}
-                className="text-[0.625rem] uppercase tracking-[0.18em] text-champagne/70"
-              >
+            <div key={field.id} className="form-field">
+              <label htmlFor={`inline-${field.id}`} className="form-label">
                 {field.label}
               </label>
               <input
@@ -62,22 +59,22 @@ export function InlineEnquiryForm() {
                       onChange: () => phoneError && setPhoneError(""),
                     }
                   : {})}
-                className="w-full border-b border-ivory/20 bg-transparent pb-2 pt-1 text-[0.95rem] text-ivory outline-none transition-colors placeholder:text-ivory/30 focus:border-champagne"
+                className="form-input"
               />
               {field.id === "phone" && phoneError && (
-                <p className="mt-1 text-[0.78rem] text-[#e08a8a]">{phoneError}</p>
+                <p className="mt-1.5 text-[0.78rem] text-[#b23b3b]">{phoneError}</p>
               )}
             </div>
           ))}
 
-          <button type="submit" className="btn-pill btn-gold mt-2 w-full justify-center">
+          <button type="submit" className="btn-pill btn-solid mt-2 w-full justify-center">
             Submit
           </button>
         </form>
 
-        <p className="mt-6 text-center text-[0.85rem] text-ivory/55">
+        <p className="mt-6 text-center text-[0.85rem] text-grey-600">
           Or call us at{" "}
-          <a href={SITE.phoneHref} className="text-champagne transition-colors hover:text-gold">
+          <a href={SITE.phoneHref} className="text-bronze transition-colors hover:text-forest">
             {SITE.phone}
           </a>
         </p>
