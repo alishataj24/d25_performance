@@ -5,14 +5,13 @@ import { useRef } from "react";
 import { SceneDirector } from "@/components/ui/SceneDirector";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
-import { useInquiry } from "@/components/providers/InquiryProvider";
-import { HERO_COPY, STATS, VOICE } from "@/lib/constants";
+import { InlineEnquiryForm } from "@/components/ui/InlineEnquiryForm";
+import { HERO_COPY, STATS } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { fadeUp, staggerContainer, ease, duration } from "@/lib/animations";
 
 export function Philosophy() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { openInquiry } = useInquiry();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -29,7 +28,7 @@ export function Philosophy() {
       <SceneDirector sceneId="overview">
         <div className="section-padding px-container relative z-[1] !pb-14 md:!pb-16">
           <div className="mx-frame">
-            {/* Intro row — headline + lede fill the full width, aligned to a common top */}
+            {/* Intro row — content on the left, enquiry form on the right */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
@@ -43,6 +42,9 @@ export function Philosophy() {
                   {HERO_COPY.headline}{" "}
                   <span className="text-bronze">{HERO_COPY.headlineAccent}</span>
                 </h2>
+                <p className="mt-6 max-w-[54ch] text-[clamp(1.05rem,1.35vw,1.22rem)] leading-[1.75] text-[#2b2721]">
+                  {HERO_COPY.paragraphs[0]}
+                </p>
               </motion.div>
 
               <motion.div
@@ -50,18 +52,9 @@ export function Philosophy() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-8%" }}
                 transition={{ duration: duration.slow, delay: 0.08, ease: ease.cinematic }}
-                className="lg:col-span-5 lg:pt-2"
+                className="lg:col-span-5"
               >
-                <p className="text-[clamp(1.05rem,1.35vw,1.22rem)] leading-[1.75] text-[#2b2721]">
-                  {HERO_COPY.paragraphs[0]}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => openInquiry("enquire")}
-                  className="btn-pill btn-solid mt-8"
-                >
-                  {VOICE.cta.connect}
-                </button>
+                <InlineEnquiryForm />
               </motion.div>
             </div>
 
