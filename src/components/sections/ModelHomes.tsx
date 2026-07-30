@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SceneDirector } from "@/components/ui/SceneDirector";
+import { ASSETS } from "@/lib/assets";
 import { ease, duration, fadeUp, staggerContainer } from "@/lib/animations";
 
 type Tour = {
-  id: string;
+  src: string;
+  poster: string;
   tag: string;
   title: string;
   sub: string;
@@ -14,13 +16,15 @@ type Tour = {
 
 const TOURS: Tour[] = [
   {
-    id: "57d6t2MmMQs",
+    src: ASSETS.modelHomeVideos.bhk3,
+    poster: ASSETS.config.interior3bhk3t,
     tag: "3 BHK",
     title: "3 BHK Model Home",
     sub: "Model Home Walkthrough",
   },
   {
-    id: "jh9K_vA1gmQ",
+    src: ASSETS.modelHomeVideos.bhk4,
+    poster: ASSETS.config.interior4bhk,
     tag: "4 BHK",
     title: "4 BHK Model Home",
     sub: "Model Home Walkthrough",
@@ -36,41 +40,38 @@ function PlayIcon() {
 }
 
 function VideoCard({ tour }: { tour: Tour }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [thumb, setThumb] = useState(
-    `https://img.youtube.com/vi/${tour.id}/maxresdefault.jpg`,
-  );
+
+  const play = () => {
+    setPlaying(true);
+    videoRef.current?.play();
+  };
 
   return (
     <motion.div
       variants={fadeUp}
       className="group relative aspect-video w-full overflow-hidden rounded-[var(--radius-card-lg)] bg-black shadow-[var(--shadow-float)]"
     >
-      {playing ? (
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src={`https://www.youtube.com/embed/${tour.id}?autoplay=1&rel=0&modestbranding=1`}
-          title={tour.title}
-          loading="lazy"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowFullScreen
-        />
-      ) : (
+      <video
+        ref={videoRef}
+        src={tour.src}
+        poster={tour.poster}
+        controls={playing}
+        playsInline
+        preload="metadata"
+        onPlay={() => setPlaying(true)}
+        onEnded={() => setPlaying(false)}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      {!playing && (
         <button
           type="button"
-          onClick={() => setPlaying(true)}
+          onClick={play}
           aria-label={`Play ${tour.title}`}
           className="absolute inset-0 h-full w-full cursor-pointer"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={thumb}
-            onError={() =>
-              setThumb(`https://img.youtube.com/vi/${tour.id}/hqdefault.jpg`)
-            }
-            alt={tour.title}
-            className="h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-          />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,18,14,0.15)_0%,transparent_35%,rgba(10,18,14,0.72)_100%)]" />
 
           {/* Tag chip */}
@@ -133,7 +134,7 @@ export function ModelHomes() {
               className="mt-14 md:mt-16 grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2"
             >
               {TOURS.map((tour) => (
-                <VideoCard key={tour.id} tour={tour} />
+                <VideoCard key={tour.tag} tour={tour} />
               ))}
             </motion.div>
           </div>
