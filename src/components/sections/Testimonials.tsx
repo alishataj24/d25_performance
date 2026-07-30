@@ -9,13 +9,13 @@ import { COPY, getChapter, VOICE } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 
-/** Resident video testimonials — thumbnail (poster) → YouTube id (from the original site). */
-const VIDEOS: { thumb: string; id: string }[] = [
-  { thumb: ASSETS.testimonials[0], id: "9vdP_InVE8w" },
-  { thumb: ASSETS.testimonials[1], id: "-9HrFNdmev4" },
-  { thumb: ASSETS.testimonials[2], id: "d4IBVxGS-bo" },
-  { thumb: ASSETS.testimonials[3], id: "Y7JyBFAZE2k" },
-  { thumb: ASSETS.testimonials[4], id: "a-AUxezyuaY" },
+/** Resident video testimonials — Vimeo (same videos as the official District 25 site). */
+const VIDEOS: { thumb: string; id: string; h: string }[] = [
+  { thumb: ASSETS.testimonials[0], id: "1108829700", h: "5944a1bdb2" },
+  { thumb: ASSETS.testimonials[1], id: "1108831446", h: "9fed645c0f" },
+  { thumb: ASSETS.testimonials[2], id: "1105731525", h: "3cc56374a9" },
+  { thumb: ASSETS.testimonials[3], id: "1105731582", h: "b11058b354" },
+  { thumb: ASSETS.testimonials[4], id: "1105731682", h: "cb9c704134" },
 ];
 
 function PlayIcon() {
@@ -26,7 +26,17 @@ function PlayIcon() {
   );
 }
 
-function VideoTestimonial({ thumb, id, index }: { thumb: string; id: string; index: number }) {
+function VideoTestimonial({
+  thumb,
+  id,
+  h,
+  index,
+}: {
+  thumb: string;
+  id: string;
+  h: string;
+  index: number;
+}) {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -37,10 +47,10 @@ function VideoTestimonial({ thumb, id, index }: { thumb: string; id: string; ind
       {playing ? (
         <iframe
           className="absolute inset-0 h-full w-full"
-          src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`}
+          src={`https://player.vimeo.com/video/${id}?h=${h}&autoplay=1&title=0&byline=0&portrait=0`}
           title={`Resident testimonial ${index + 1}`}
           loading="lazy"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
         />
       ) : (
@@ -96,7 +106,7 @@ export function Testimonials() {
         className="film-strip -mx-6 px-6 md:-mx-12 md:px-12 pb-4"
       >
         {VIDEOS.map((v, i) => (
-          <VideoTestimonial key={v.id} thumb={v.thumb} id={v.id} index={i} />
+          <VideoTestimonial key={v.id} thumb={v.thumb} id={v.id} h={v.h} index={i} />
         ))}
       </motion.div>
     </SectionShell>
