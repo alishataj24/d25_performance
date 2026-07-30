@@ -17,6 +17,10 @@ export const ASSETS = {
   masterplan: `${LOCAL}/masterplan-hires.png`,
   sportsHeroBanner: `${LOCAL}/sports-hero-banner.png`,
   video: `${LOCAL}/hero-video.mp4`,
+  modelHomeVideos: {
+    bhk3: `${LOCAL}/model-home-3bhk.mp4`,
+    bhk4: `${LOCAL}/model-home-4bhk.mp4`,
+  },
   seaImg: `${LOCAL}/sea-img.png`,
 
   /** Premium architectural renders — use to avoid repeating heroTowers */
