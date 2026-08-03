@@ -9,27 +9,27 @@ import { ASSETS } from "@/lib/assets";
 import { ease } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
-/** Desktop — "Next Chapter of Luxury" creatives (2000×900) */
+/** Desktop — apartment elevation first, then interiors (2000×900) */
 const DESKTOP_SLIDES = [
   {
     src: ASSETS.slider.desk1,
-    alt: "Nambiar District 25 Phase 3 — The next chapter of luxury begins.",
+    alt: "Nambiar District 25 Phase 3 — Skyrise residences off Sarjapur Road.",
   },
   {
     src: ASSETS.slider.desk2,
-    alt: "Nambiar District 25 Phase 3 — The SOHO Life. 2, 3 & 4 BHK skyrise residences.",
+    alt: "Nambiar District 25 Phase 3 — The next chapter of luxury begins.",
   },
   {
     src: ASSETS.slider.desk3,
-    alt: "Nambiar District 25 Phase 3 — Skyrise residences off Sarjapur Road.",
+    alt: "Nambiar District 25 Phase 3 — The SOHO Life. 2, 3 & 4 BHK skyrise residences.",
   },
 ] as const;
 
-/** Mobile — "Next Chapter of Luxury" creatives (500×800) */
+/** Mobile — apartment elevation first, then interiors (500×800) */
 const MOBILE_SLIDES = [
   {
     src: ASSETS.slider.mob1,
-    alt: "Nambiar District 25 Phase 3 — The next chapter of luxury begins.",
+    alt: "Nambiar District 25 Phase 3 — Skyrise residences off Sarjapur Road.",
   },
   {
     src: ASSETS.slider.mob2,
@@ -37,7 +37,7 @@ const MOBILE_SLIDES = [
   },
   {
     src: ASSETS.slider.mob3,
-    alt: "Nambiar District 25 Phase 3 — Skyrise residences off Sarjapur Road.",
+    alt: "Nambiar District 25 Phase 3 — The next chapter of luxury begins.",
   },
 ] as const;
 

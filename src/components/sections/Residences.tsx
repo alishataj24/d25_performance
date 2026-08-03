@@ -60,7 +60,7 @@ function ConfigDetail({
           onClick={() => openInquiry("pricing")}
           className="group mt-6 inline-flex items-center gap-2.5 rounded-full bg-ivory/10 px-7 py-3 text-[0.8rem] font-medium tracking-[0.1em] text-ivory/85 transition-all duration-500 hover:-translate-y-0.5 hover:bg-gold hover:text-forest-dark cursor-pointer lg:mt-8"
         >
-          Know More
+          Check Price
           <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
         </button>
       </div>

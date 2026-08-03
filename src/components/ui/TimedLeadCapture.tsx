@@ -14,7 +14,7 @@ import { useHeroExperience } from "@/components/providers/HeroExperienceProvider
 
 /** Bump key when behaviour changes so prior dismissals don’t hide the popup forever in a tab */
 const STORAGE_KEY = "d25-lead-capture-v2";
-const DELAY_MS = 5000;
+const DELAY_MS = 6000;
 
 const FIELDS = [
   { id: "name", type: "text", label: "Name", autoComplete: "name" },
@@ -55,7 +55,7 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
     setMounted(true);
   }, []);
 
-  // 5s after the hero/loading experience is ready — not while the splash is still up
+  // 6s after the hero/loading experience is ready — not while the splash is still up
   useEffect(() => {
     if (!mounted || !loadingComplete || suppressed || armed.current) return;
     if (wasDismissed()) return;
