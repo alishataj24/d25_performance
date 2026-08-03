@@ -47,11 +47,11 @@ export const ASSETS = {
     web2: `${LOCAL}/slider-web2.png`,
     web3: `${LOCAL}/banner-desk-elevation-v2.png`,
     web4: `${LOCAL}/banner-desk-interior-v2.png`,
-    /** Desktop hero — 2000×900, logo-erased "Next Chapter of Luxury" creatives */
-    desk1: `${LOCAL}/banner-desk-web-1.jpg`,
-    desk2: `${LOCAL}/banner-desk-web-2.jpg`,
-    desk3: `${LOCAL}/banner-desk-web-3.jpg`,
-    /** Mobile hero — 500×800, logo-erased "Next Chapter of Luxury" creatives */
+    /** Desktop hero — 2000×900; *1 = apartment elevation (first slide) */
+    desk1: `${LOCAL}/banner-desk-web-3.jpg`,
+    desk2: `${LOCAL}/banner-desk-web-1.jpg`,
+    desk3: `${LOCAL}/banner-desk-web-2.jpg`,
+    /** Mobile hero — 500×800; *1 = apartment elevation (first slide) */
     mob1: `${LOCAL}/banner-mob-web-1.jpg`,
     mob2: `${LOCAL}/banner-mob-web-2.jpg`,
     mob3: `${LOCAL}/banner-mob-web-3.jpg`,

@@ -28,14 +28,24 @@ export function Philosophy() {
       <SceneDirector sceneId="overview">
         <div className="section-padding px-container relative z-[1] !pb-14 md:!pb-16">
           <div className="mx-frame">
-            {/* Intro row — content on the left, enquiry form on the right */}
+            {/* Intro row — mobile: form then overview; desktop: content left, form right */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-8%" }}
                 transition={{ duration: duration.slow, ease: ease.cinematic }}
-                className="lg:col-span-7"
+                className="order-1 lg:order-2 lg:col-span-5"
+              >
+                <InlineEnquiryForm />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-8%" }}
+                transition={{ duration: duration.slow, delay: 0.08, ease: ease.cinematic }}
+                className="order-2 lg:order-1 lg:col-span-7"
               >
                 <span className="kicker mb-6">Overview</span>
                 <h2 className="h-section text-forest">
@@ -45,16 +55,6 @@ export function Philosophy() {
                 <p className="mt-6 max-w-[54ch] text-[clamp(1.05rem,1.35vw,1.22rem)] leading-[1.75] text-[#2b2721]">
                   {HERO_COPY.paragraphs[0]}
                 </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-8%" }}
-                transition={{ duration: duration.slow, delay: 0.08, ease: ease.cinematic }}
-                className="lg:col-span-5"
-              >
-                <InlineEnquiryForm />
               </motion.div>
             </div>
 
