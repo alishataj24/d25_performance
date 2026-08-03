@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { SITE } from "@/lib/constants";
 import { isValidIndianMobile, PHONE_ERROR } from "@/lib/validation";
 
 const FIELDS = [
@@ -71,13 +70,6 @@ export function InlineEnquiryForm() {
             Submit
           </button>
         </form>
-
-        <p className="mt-6 text-center text-[0.85rem] text-grey-600">
-          Or call us at{" "}
-          <a href={SITE.phoneHref} className="text-bronze transition-colors hover:text-forest">
-            {SITE.phone}
-          </a>
-        </p>
       </div>
     </div>
   );

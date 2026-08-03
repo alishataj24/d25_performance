@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
-import { SITE, VOICE } from "@/lib/constants";
+import { VOICE } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
 import { isValidIndianMobile, PHONE_ERROR } from "@/lib/validation";
@@ -236,16 +236,6 @@ export function TimedLeadCapture({ suppressed = false }: TimedLeadCaptureProps) 
                     Submit
                   </Button>
                 </form>
-
-                <p className="inquiry-footer">
-                  {VOICE.modal.phoneNote}{" "}
-                  <a
-                    href={SITE.phoneHref}
-                    className="text-bronze transition-colors hover:text-forest"
-                  >
-                    {SITE.phone}
-                  </a>
-                </p>
               </div>
             </div>
           </motion.div>

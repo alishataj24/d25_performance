@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HighQualityImage } from "@/components/ui/HighQualityImage";
-import { SITE, VOICE, getConciergeSubmitLabel } from "@/lib/constants";
+import { VOICE, getConciergeSubmitLabel } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
 import { isValidIndianMobile, PHONE_ERROR } from "@/lib/validation";
@@ -181,13 +181,6 @@ export function InquiryDialog({
                     {getConciergeSubmitLabel(type)}
                   </Button>
                 </form>
-
-                <p className="inquiry-footer">
-                  {modalCopy.phoneNote}{" "}
-                  <a href={SITE.phoneHref} className="text-bronze hover:text-forest transition-colors">
-                    {SITE.phone}
-                  </a>
-                </p>
               </div>
             </div>
           </motion.div>

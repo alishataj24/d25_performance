@@ -7,7 +7,7 @@ import { HighQualityImage } from "@/components/ui/HighQualityImage";
 import { ZoomableImage } from "@/components/ui/ZoomableImage";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionShell } from "@/components/ui/SectionShell";
-import { COPY, getChapter, SITE } from "@/lib/constants";
+import { COPY, getChapter } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
 import { ease, duration } from "@/lib/animations";
 import { isValidIndianMobile, PHONE_ERROR } from "@/lib/validation";
@@ -193,13 +193,6 @@ export function MasterPlan() {
             View Master Plan
           </button>
         </form>
-
-        <p className="inquiry-footer">
-          Or call us at{" "}
-          <a href={SITE.phoneHref} className="text-bronze transition-colors hover:text-forest">
-            {SITE.phone}
-          </a>
-        </p>
       </motion.div>
     </motion.div>
   );
